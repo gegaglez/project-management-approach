@@ -1,0 +1,2961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Your Project Management Approach</title>
+<meta name="description" content="A free test that builds a project management profile: approach, philosophy, framework and supporting techniques.">
+<style>
+:root {
+  /* Palette taken from the brand banner: cream, deep maroon, gold, dusty rose */
+  --bg: #F8ECDE;
+  --surface: #FFFAF4;
+  --ink: #2E1D1B;
+  --muted: #7C6455;
+  --line: #E9D8C6;
+  --line-strong: #D3B79E;
+  --accent: #4A1116;
+  --accent-hover: #360B0F;
+  --accent-soft: #F3E2D8;
+  --accent-line: #D9B6A8;
+  --gold: #A6803F;
+  --gold-soft: #E3D0AC;
+  --rose: #D19A8A;
+  --r-sheet: 24px;
+  --r-card: 14px;
+  --r-tile: 10px;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --shadow: 0 1px 2px rgba(46, 29, 27, .05), 0 14px 34px -14px rgba(74, 17, 22, .18);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid rgba(74, 17, 22, .35); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+#app { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ---------- Language switch ---------- */
+.langbar { position: absolute; top: 0; right: 0; left: 0; z-index: 20; pointer-events: none; }
+.langswitch {
+  pointer-events: auto;
+  position: absolute; top: 18px; right: 20px;
+  display: inline-flex; gap: 2px; padding: 3px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; box-shadow: 0 1px 2px rgba(38, 32, 44, .05);
+}
+.lang-btn {
+  border: 0; background: none; cursor: pointer;
+  padding: 5px 12px; border-radius: 999px;
+  font-size: 13px; font-weight: 650; letter-spacing: .02em; color: var(--muted);
+  transition: background-color .15s, color .15s;
+}
+.lang-btn:hover { color: var(--ink); }
+.lang-btn.is-on { background: var(--accent); color: #FFF6E9; }
+@media (max-width: 640px) {
+  .langswitch { top: 10px; right: 12px; }
+  .lang-btn { padding: 5px 10px; font-size: 12px; }
+}
+.wrap { width: 100%; max-width: 720px; margin: 0 auto; padding: 0 20px; }
+.wrap--wide { max-width: 1040px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 24px;
+  border-radius: 999px; border: 1px solid transparent;
+  font-weight: 600; font-size: 15px; letter-spacing: -.005em;
+  cursor: pointer; text-decoration: none;
+  transition: background-color .15s, border-color .15s, color .15s, opacity .15s;
+}
+.btn-primary { background: var(--accent); color: #FFF6E9; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary[disabled] { background: #E5D5C4; color: #8A7364; cursor: not-allowed; }
+.btn-outline { background: var(--surface); border-color: var(--line-strong); }
+.btn-outline:hover { border-color: var(--ink); }
+.btn-ghost { background: transparent; color: var(--muted); padding: 0 14px; }
+.btn-ghost:hover { color: var(--ink); }
+.link-btn {
+  background: none; border: 0; padding: 6px 0; cursor: pointer;
+  color: var(--accent); font-weight: 600; font-size: 15px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.link-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+.link-btn .chev { transition: transform .2s var(--ease); display: block; }
+.link-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+/* ---------- Family chip ---------- */
+.chip {
+  display: inline-flex; align-items: center; height: 26px; padding: 0 11px;
+  border-radius: 99px; border: 1px solid var(--accent-line); background: var(--accent-soft);
+  color: var(--accent); font-size: 13px; font-weight: 600;
+}
+
+/* ---------- Word map ---------- */
+.wordmap-section { margin-top: 52px; }
+.wordmap {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 8px 26px; margin: 0 auto; max-width: 900px;
+}
+.word {
+  background: none; border: 0; padding: 6px 2px; margin: 0; cursor: pointer;
+  color: var(--ink); line-height: 1.02; letter-spacing: -.025em; font-weight: 650;
+  border-bottom: 2px solid transparent;
+  transition: color .18s var(--ease), border-color .18s var(--ease), opacity .18s;
+  animation: wordIn .6s var(--ease) backwards, drift 9s ease-in-out infinite alternate;
+}
+.word.s1 { font-size: clamp(15px, 1.4vw, 17px); font-weight: 500; color: var(--muted); }
+.word.s2 { font-size: clamp(18px, 2vw, 23px); font-weight: 600; }
+.word.s3 { font-size: clamp(22px, 2.8vw, 31px); }
+.word.s4 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -.035em; }
+.word.is-serif { font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.word:hover { color: var(--accent); }
+.word.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+.wordmap.has-active .word:not(.is-active) { opacity: .45; }
+@keyframes wordIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes drift { from { transform: translateY(-3px); } to { transform: translateY(3px); } }
+
+.wordcard {
+  max-width: 640px; margin: 30px auto 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 22px 24px; box-shadow: var(--shadow);
+}
+.wordcard.is-empty {
+  background: none; border-style: dashed; border-color: var(--line-strong); box-shadow: none;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  color: var(--muted); font-size: 15px; padding: 16px;
+}
+.wordcard-body { animation: fadeIn .28s var(--ease) both; }
+.wordcard-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.wordcard h3 { margin: 0; font-size: 22px; letter-spacing: -.02em; font-weight: 700; line-height: 1.15; }
+.wordcard-tagline { margin: 10px 0 14px; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--accent); }
+.wordcard dl { margin: 0; display: grid; gap: 12px; }
+.wordcard dt { font-weight: 650; font-size: 14px; }
+.wordcard dd { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+.wordcard .flow { margin-top: 14px; }
+.wordcard-close { margin-top: 16px; }
+
+/* ---------- Intro ---------- */
+.intro { flex: 1; padding: 76px 0 72px; }
+.intro-hero { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.slab {
+  display: inline-block; background: var(--accent); color: #FFF6E9;
+  border-radius: 26px; padding: 18px 34px 20px; margin: 0;
+  font-size: clamp(26px, 4vw, 44px); line-height: 1.06;
+  font-weight: 800; letter-spacing: -.015em; text-transform: uppercase;
+  max-width: 19ch;
+}
+.rule { display: flex; align-items: center; gap: 14px; margin: 26px 0 20px; width: min(440px, 82%); color: var(--gold); }
+.rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: currentColor; opacity: .6; }
+.intro-lead { font-size: clamp(19px, 2.4vw, 27px); font-weight: 700; letter-spacing: -.015em; line-height: 1.25; color: var(--ink); margin: 0 0 18px; max-width: 26ch; }
+.intro-text { color: var(--muted); font-size: 17px; margin: 0 0 30px; max-width: 58ch; }
+.intro-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.intro-cta .btn { min-height: 54px; padding: 0 30px; font-size: 16px; }
+.intro-time { font-size: 13px; color: var(--muted); margin: 0; }
+.map-caption { margin: 0 0 22px; font-size: 14px; color: var(--muted); text-align: center; }
+
+/* ---------- Quiz ---------- */
+.quiz { flex: 1; display: flex; flex-direction: column; padding: 62px 0 0; }
+.progress-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; color: var(--muted); margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+.progress-row strong { color: var(--ink); font-weight: 600; }
+.bar { height: 6px; background: #EBDCCA; border-radius: 99px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); border-radius: 99px; transition: width .45s var(--ease); }
+.stage { padding: 40px 0 24px; }
+.stage.in-fwd { animation: inFwd .35s var(--ease) both; }
+.stage.in-back { animation: inBack .35s var(--ease) both; }
+@keyframes inFwd { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+@keyframes inBack { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: none; } }
+.q-title { font-size: clamp(24px, 3.6vw, 32px); line-height: 1.15; letter-spacing: -.02em; font-weight: 750; margin: 0 0 8px; }
+.q-title:focus { outline: none; }
+.q-help { color: var(--muted); margin: 0 0 28px; font-size: 16px; }
+.q-help:empty { display: none; }
+.q-title + .options { margin-top: 28px; }
+
+.options { display: grid; gap: 10px; }
+.options.is-compact { grid-template-columns: 1fr 1fr; }
+.opt {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  text-align: left; cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--line);
+  border-radius: var(--r-card); padding: 16px 16px 16px 18px; min-height: 62px;
+  transition: border-color .15s, background-color .15s, box-shadow .15s;
+}
+.opt:hover { border-color: var(--line-strong); }
+.opt[aria-checked="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent) inset; }
+.opt-dot {
+  flex: none; width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid var(--line-strong); background: #fff; position: relative;
+  transition: border-color .15s;
+}
+.opt[aria-checked="true"] .opt-dot { border-color: var(--accent); }
+.opt[aria-checked="true"] .opt-dot::after {
+  content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--accent);
+  animation: pop .2s var(--ease);
+}
+@keyframes pop { from { transform: scale(.3); } to { transform: scale(1); } }
+.opt-text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.opt-label { font-weight: 600; font-size: 16px; line-height: 1.3; }
+.opt-sub { font-size: 14px; color: var(--muted); line-height: 1.35; }
+.opt-key {
+  flex: none; font-size: 12px; color: var(--muted); border: 1px solid var(--line);
+  border-radius: 6px; min-width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+.options.is-compact .opt { min-height: 56px; padding: 12px 14px; }
+.options.is-compact .opt-label { font-size: 15px; }
+
+.q-nav {
+  position: sticky; bottom: 0; z-index: 5;
+  background: linear-gradient(to top, var(--bg) 70%, rgba(245, 244, 247, 0));
+  padding: 16px 0 24px;
+}
+.q-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.kbd-hint { font-size: 13px; color: var(--muted); }
+.continue-note { font-size: 13px; color: var(--muted); text-align: right; min-height: 20px; margin: 6px 0 0; }
+
+/* ---------- Result ---------- */
+.result-page { padding: 62px 0 56px; }
+.sheet { background: var(--surface); border-radius: var(--r-sheet); box-shadow: var(--shadow); padding: 40px; }
+.result-head { border-left: 4px solid var(--accent); padding-left: 24px; animation: reveal .5s var(--ease) both; }
+.result-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+@keyframes reveal { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+.result-kicker { margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.result-name { margin: 0; font-size: clamp(27px, 4.2vw, 40px); line-height: 1.06; letter-spacing: -.02em; font-weight: 800; text-transform: uppercase; }
+.result-tagline { margin: 12px 0 14px; font-size: 19px; font-weight: 600; line-height: 1.35; color: var(--accent); }
+.strength { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; }
+.dots { display: inline-flex; gap: 4px; }
+.dots i { width: 22px; height: 6px; border-radius: 99px; background: #EBDCCA; }
+.dots i.on { background: var(--accent); animation: dotIn .4s var(--ease) both; }
+.dots i.on:nth-child(2) { animation-delay: .12s; }
+.dots i.on:nth-child(3) { animation-delay: .24s; }
+@keyframes dotIn { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); } }
+.close-call { margin: 24px 0 0; padding: 12px 16px; border-radius: 12px; background: var(--accent-soft); color: var(--ink); font-size: 15px; }
+
+/* ---------- Profile header ---------- */
+.tagline-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.tag {
+  display: inline-flex; align-items: center; height: 26px; padding: 0 12px;
+  border-radius: 99px; background: var(--accent); color: #FFF6E9;
+  font-size: 12px; font-weight: 700; letter-spacing: .06em;
+}
+.result-what { margin: 16px 0 0; color: var(--muted); max-width: 56ch; }
+.read-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+.section-note { margin: 0 0 16px; font-size: 14px; color: var(--muted); }
+.r-section .section-note + .stack { margin-top: 4px; }
+
+/* ---------- The stack ---------- */
+.stack { display: grid; gap: 0; }
+.layer {
+  border: 1.5px solid var(--line); border-radius: var(--r-card);
+  padding: 16px 18px; background: var(--surface);
+  animation: layerIn .4s var(--ease) both;
+}
+.layer:nth-child(3) { animation-delay: .08s; }
+.layer:nth-child(5) { animation-delay: .16s; }
+.layer:nth-child(7) { animation-delay: .24s; }
+.layer:nth-child(9) { animation-delay: .32s; }
+@keyframes layerIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.layer.is-supporting { background: #FCF3E8; border-style: dashed; }
+.layer.is-muted { background: none; border-style: dashed; }
+.layer.is-muted .layer-name { color: var(--muted); font-weight: 600; }
+.layer-label { margin: 0 0 5px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.layer.is-supporting .layer-label, .layer.is-muted .layer-label { color: var(--muted); }
+.layer-name { margin: 0; font-size: 20px; line-height: 1.2; letter-spacing: -.02em; font-weight: 700; }
+.layer-note { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+.layer-caveat { margin: 10px 0 0; font-size: 14px; color: var(--ink); background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; }
+.layer .link-btn { font-size: 14px; margin-top: 8px; }
+.layer .learn { margin-top: 10px; }
+.connector { text-align: center; color: var(--gold); font-size: 18px; line-height: 1; padding: 8px 0; font-weight: 700; }
+
+/* ---------- Profile bars ---------- */
+.metrics { display: grid; gap: 10px; }
+.metric { display: grid; grid-template-columns: 132px 1fr 30px; align-items: center; gap: 12px; }
+.metric-label { font-size: 14px; font-weight: 600; }
+.metric-track { height: 8px; background: #EBDCCA; border-radius: 99px; overflow: hidden; }
+.metric-fill { display: block; height: 100%; border-radius: 99px; background: var(--accent); animation: growBar .6s var(--ease) both; transform-origin: left; }
+@keyframes growBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.metric-value { font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- Combination diagram ---------- */
+.combo {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+  padding: 20px; border-radius: var(--r-card); background: var(--accent-soft);
+  margin: 0 0 16px;
+}
+.combo-item { font-weight: 700; letter-spacing: -.01em; font-size: 15px; color: var(--accent); }
+.combo-item.is-main { font-size: 22px; }
+.combo-item.is-side { font-size: 15px; }
+.combo-op { color: var(--accent); opacity: .6; font-weight: 700; }
+
+.step-extra { margin: 22px 0 0; font-size: 15px; color: var(--muted); }
+.step-extra strong { color: var(--ink); }
+.warnings { margin: 0; padding-left: 20px; display: grid; gap: 8px; color: var(--muted); }
+.warnings li { padding-left: 2px; }
+.warnings li::marker { color: var(--gold); }
+
+.r-section { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 28px; }
+.r-section h2 { font-size: 18px; letter-spacing: -.005em; margin: 0 0 12px; font-weight: 750; }
+.r-section p { margin: 0; max-width: 62ch; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.checks li { display: flex; gap: 12px; align-items: flex-start; }
+.checks svg { flex: none; margin-top: 3px; }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; gap: 16px; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 32px 1fr; gap: 14px; }
+.steps li::before {
+  content: counter(step); width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--gold-soft); color: var(--gold);
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+}
+.steps strong { display: block; font-weight: 650; }
+.steps span { color: var(--muted); font-size: 15px; }
+
+.learn-toggle { margin-top: 28px; }
+.learn { margin-top: 14px; border: 1px solid var(--line); border-radius: var(--r-card); padding: 22px; background: #FCF3E8; }
+.learn:not([hidden]) { animation: openUp .28s var(--ease); }
+@keyframes openUp { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.learn dl { margin: 0; display: grid; gap: 14px; }
+.learn dt { font-weight: 650; font-size: 14px; }
+.learn dd { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+.learn-ex { margin-top: 18px; }
+.learn-ex-title { font-weight: 650; font-size: 14px; margin: 0 0 10px; }
+.flow { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 6px; align-items: center; }
+.flow li { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+.flow li span { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; }
+.flow li:not(:last-child)::after { content: "→"; color: var(--muted); }
+.learn-note { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+.ref-line { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); line-height: 1.5; }
+.ref-note { display: block; margin-bottom: 6px; }
+.ref-note strong { color: var(--ink); font-weight: 650; }
+.ref-line a { color: var(--accent); font-weight: 600; text-underline-offset: 2px; }
+
+.also { margin-top: 20px; border: 1.5px solid var(--line); border-radius: var(--r-sheet); padding: 28px 32px; }
+.also-label { margin: 0 0 14px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.also-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.also-name { margin: 0; font-size: 22px; letter-spacing: -.02em; font-weight: 700; line-height: 1.15; }
+.also-head .strength { margin-top: 6px; }
+.also-if { margin: 16px 0 6px; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--accent); }
+.also-why { margin: 0; color: var(--muted); font-size: 15px; }
+.also .learn-toggle { margin-top: 12px; }
+
+.others { margin-top: 24px; }
+.others-body { margin-top: 8px; color: var(--muted); font-size: 15px; max-width: 64ch; }
+.others-body p { margin: 0 0 10px; }
+
+.lesson { margin-top: 40px; padding: 4px 0 4px 20px; border-left: 3px solid var(--gold); }
+.lesson p { margin: 0 0 8px; max-width: 60ch; }
+.lesson .big { font-size: 21px; line-height: 1.3; font-weight: 700; letter-spacing: -.015em; }
+.lesson .small { color: var(--muted); font-size: 15px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; align-items: center; }
+.copy-status { font-size: 14px; color: var(--accent); font-weight: 600; min-height: 20px; }
+.copy-fallback { width: 100%; margin-top: 12px; }
+.copy-fallback textarea { width: 100%; min-height: 110px; border: 1px solid var(--line-strong); border-radius: 12px; padding: 12px; font: inherit; font-size: 14px; resize: vertical; }
+
+.source { margin: 40px 0 0; font-size: 13px; color: var(--muted); }
+.source a { color: var(--muted); text-underline-offset: 2px; }
+.source a:hover { color: var(--ink); }
+
+.fade-in { animation: fadeIn .4s var(--ease) both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .intro { padding: 64px 0 56px; }
+  .slab { padding: 14px 20px 16px; border-radius: 20px; max-width: 15ch; }
+  .rule { margin: 20px 0 16px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  .options.is-compact { grid-template-columns: 1fr; }
+  .opt-key, .kbd-hint { display: none; }
+  .stage { padding: 28px 0 16px; }
+  .sheet { padding: 26px 20px; border-radius: 20px; }
+  .result-head { padding-left: 16px; }
+  .metric { grid-template-columns: 1fr auto; grid-template-areas: "label value" "track track"; gap: 4px 8px; }
+  .metric-label { grid-area: label; font-size: 13px; }
+  .metric-track { grid-area: track; }
+  .metric-value { grid-area: value; }
+  .metrics { gap: 14px; }
+  .layer { padding: 14px 16px; }
+  .layer-name { font-size: 18px; }
+  .combo { padding: 16px; }
+  .combo-item.is-main { font-size: 19px; }
+  .also { padding: 22px 20px; border-radius: 20px; }
+  .wordmap { gap: 2px 16px; }
+  .wordmap-section { margin-top: 36px; }
+  .wordcard { padding: 18px 18px; }
+  .actions .btn { flex: 1 1 auto; }
+  .intro-lead { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="langbar">
+  <div class="langswitch" role="group" id="langswitch">
+    <span class="sr-only" id="lang-label">Language / Idioma</span>
+    <button type="button" class="lang-btn is-on" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+  </div>
+</div>
+<main id="app" aria-live="off"></main>
+<div id="announcer" class="sr-only" aria-live="polite"></div>
+<noscript><p style="padding:24px">This test needs JavaScript to calculate your result.</p></noscript>
+<script>
+/* ==========================================================
+   QUESTIONS  →  DIMENSIONS  →  AFFINITIES
+
+   Every option carries two things:
+
+   dims – readings on a 0-100 scale for the dimensions it says
+          something about. Anything not mentioned stays at the
+          neutral default (50). Meaning of each scale:
+
+            clarity         requirements are clearly defined
+            change          requirements are likely to change
+            uncertainty     the path to the goal is unknown
+            experimentation need to test ideas before committing
+            stakeholder     client / stakeholder involvement
+            delivery        need for frequent deliveries
+            flow            continuous stream of work (vs. cycles)
+            teamSize        size of team and stakeholder base
+            autonomy        freedom of the team to organize itself
+            dependencies    how much tasks depend on each other
+            timePressure    how fixed and tight the timeline is
+            budget          how tight the budget is
+            resources       availability of dedicated people
+                            (LOW = scarce or shared)
+            regulation      documentation, approvals, compliance
+            risk            consequences if things go wrong
+            quality         need to control defects and errors
+            techComplexity  technical difficulty and integrations
+            efficiency      need to remove waste, steps and cost
+            behavior        success depends on people changing
+                            how they work
+
+   s    – affinity points (+3 strong … -3 contradicts) for:
+            philosophies  agile lean sixsigma
+            frameworks    scrum scrumban xp apf prince2 per rad
+            techniques    kanban cpm ccpm outcome
+            processes     npi
+            standard      pmbok
+
+   because – sentence shown in "Why this fits you".
+   ========================================================== */
+const QUESTIONS = [
+  {
+    id: "type",
+    title: "What kind of project is this?",
+    help: "Pick the closest one. It's one input among many, not the whole answer.",
+    compact: true,
+    options: [
+      { id: "software", label: "Software or app development",
+        because: "You're building software",
+        dims: { techComplexity: 72, delivery: 68, clarity: 45 }, s: { xp: 2, rad: 2, scrum: 1, agile: 1, per: -1 } },
+      { id: "techimpl", label: "Implementing a new system or tool",
+        because: "You're implementing a new system in an organization",
+        dims: { regulation: 60, dependencies: 62, techComplexity: 60, behavior: 60 }, s: { per: 3, prince2: 1, xp: -1, rad: -1 } },
+      { id: "process", label: "Process or operations improvement",
+        because: "You're improving how the organization works",
+        dims: { efficiency: 75, quality: 62, behavior: 62, clarity: 55 }, s: { lean: 3, sixsigma: 2, per: 2, rad: -1, xp: -2 } },
+      { id: "launch", label: "Launching a new product",
+        because: "You're taking a new product to market",
+        dims: { uncertainty: 62, timePressure: 62, dependencies: 60 }, s: { npi: 3, agile: 1, lean: 1 } },
+      { id: "marketing", label: "Marketing or campaign work",
+        because: "You're running marketing or campaign work",
+        dims: { flow: 68, behavior: 62, delivery: 62, timePressure: 58 }, s: { kanban: 2, agile: 1, outcome: 1, xp: -2 } },
+      { id: "ops", label: "Ongoing operations or support",
+        because: "You're running ongoing operations or support",
+        dims: { flow: 82, efficiency: 62, quality: 60, clarity: 55 }, s: { kanban: 3, lean: 2, scrum: -1, npi: -2 } },
+      { id: "construction", label: "Construction or physical build",
+        because: "You're managing a physical build",
+        dims: { dependencies: 82, clarity: 72, change: 30, regulation: 68, risk: 62 }, s: { cpm: 3, prince2: 1, xp: -3, rad: -3, scrum: -2 } },
+      { id: "consulting", label: "Consulting or client engagement",
+        because: "You're delivering an engagement for a client",
+        dims: { stakeholder: 72, timePressure: 58, regulation: 55 }, s: { agile: 1, prince2: 1, outcome: 1 } },
+      { id: "internal", label: "An internal company project",
+        because: "This is an internal project",
+        dims: { resources: 35, autonomy: 55, behavior: 55 }, s: { kanban: 1, lean: 1 } },
+      { id: "research", label: "Research, innovation or R&D",
+        because: "You're working on research and innovation",
+        dims: { uncertainty: 82, experimentation: 85, clarity: 25 }, s: { apf: 3, agile: 1, rad: 1, prince2: -1, cpm: -2 } }
+    ]
+  },
+  {
+    id: "clarity",
+    title: "How clear is what needs to be delivered?",
+    help: "",
+    options: [
+      { id: "defined", label: "Very clear", sub: "Requirements are defined and agreed from the start",
+        because: "Your requirements are defined from the start",
+        dims: { clarity: 92, uncertainty: 18, change: 25 }, s: { prince2: 1, cpm: 1, apf: -2, rad: -2, agile: -1 } },
+      { id: "mostly", label: "Mostly clear", sub: "Some details will need adjusting",
+        because: "Most of what you need to deliver is already clear",
+        dims: { clarity: 70, uncertainty: 38 }, s: { scrum: 1, prince2: 1 } },
+      { id: "evolving", label: "It will evolve", sub: "We know the direction, the details take shape as we go",
+        because: "The details will take shape as the project moves",
+        dims: { clarity: 38, uncertainty: 62, change: 68 }, s: { agile: 2, scrum: 1, scrumban: 1, apf: 1, prince2: -1 } },
+      { id: "discovering", label: "Still being discovered", sub: "We're figuring out what the project really needs",
+        because: "You're still discovering what the project really needs",
+        dims: { clarity: 15, uncertainty: 85, change: 80, experimentation: 72 }, s: { apf: 3, rad: 2, agile: 2, cpm: -2, prince2: -2 } }
+    ]
+  },
+  {
+    id: "change",
+    title: "How likely is it that requirements change after you start?",
+    help: "",
+    options: [
+      { id: "rare", label: "Very unlikely", sub: "Changes would be the exception",
+        because: "Changes after kickoff would be the exception",
+        dims: { change: 12, clarity: 72 }, s: { cpm: 2, prince2: 1, agile: -2, scrumban: -1, apf: -2 } },
+      { id: "some", label: "Some adjustments", sub: "The core stays, details move",
+        because: "You expect adjustments, but the core should hold",
+        dims: { change: 38 }, s: { scrum: 1, prince2: 1, per: 1 } },
+      { id: "likely", label: "Likely to evolve", sub: "We expect to change direction along the way",
+        because: "You expect priorities to shift along the way",
+        dims: { change: 72, uncertainty: 60 }, s: { agile: 2, scrum: 1, scrumban: 1, apf: 1, xp: 1, cpm: -1 } },
+      { id: "constant", label: "Constantly", sub: "Priorities move almost every week",
+        because: "Your priorities move almost every week",
+        dims: { change: 92, uncertainty: 70, flow: 65 }, s: { kanban: 2, scrumban: 2, agile: 2, apf: 1, cpm: -2, prince2: -2 } }
+    ]
+  },
+  {
+    id: "solution",
+    title: "How well do you know how to get there?",
+    help: "Not the goal, but the way to reach it.",
+    options: [
+      { id: "known", label: "We've done this before", sub: "The path is known and repeatable",
+        because: "You've done work like this before",
+        dims: { uncertainty: 15, experimentation: 15, clarity: 70 }, s: { cpm: 1, prince2: 1, per: 1, apf: -2, rad: -1 } },
+      { id: "mostly", label: "Mostly known", sub: "A few parts will need figuring out",
+        because: "The approach is mostly known, with a few open parts",
+        dims: { uncertainty: 40, experimentation: 40 }, s: { scrum: 1, per: 1 } },
+      { id: "goal", label: "Goal is clear, solution isn't", sub: "We'll find the how as we go",
+        because: "You know the goal but not yet the solution",
+        dims: { uncertainty: 78, experimentation: 70, clarity: 40 }, s: { apf: 3, agile: 2, rad: 1, scrum: 1, prince2: -1, cpm: -2 } },
+      { id: "hypothesis", label: "We're testing an idea", sub: "We're not sure it will work at all",
+        because: "You're still testing whether the idea works",
+        dims: { uncertainty: 90, experimentation: 92, clarity: 22, risk: 60 }, s: { rad: 3, apf: 2, agile: 1, npi: 1, prince2: -2, cpm: -2 } }
+    ]
+  },
+  {
+    id: "stakeholders",
+    title: "How involved are clients or stakeholders?",
+    help: "",
+    options: [
+      { id: "handsoff", label: "Hands off", sub: "They agree the scope and check in at the end",
+        because: "Stakeholders step in mainly at the start and the end",
+        dims: { stakeholder: 15 }, s: { cpm: 1, prince2: 1, agile: -2, apf: -2, rad: -2, scrum: -1 } },
+      { id: "checkpoints", label: "At checkpoints", sub: "Reviews at agreed milestones",
+        because: "Stakeholders review the work at agreed checkpoints",
+        dims: { stakeholder: 45, regulation: 58 }, s: { prince2: 2, per: 1, npi: 1 } },
+      { id: "regular", label: "Regularly", sub: "They see progress and give feedback often",
+        because: "Stakeholders see progress and give feedback often",
+        dims: { stakeholder: 75, delivery: 65 }, s: { scrum: 2, agile: 2, apf: 1, xp: 1 } },
+      { id: "continuous", label: "Side by side", sub: "They're part of the day-to-day decisions",
+        because: "Stakeholders are part of your day-to-day decisions",
+        dims: { stakeholder: 92, delivery: 70, behavior: 60 }, s: { rad: 2, apf: 2, agile: 2, xp: 2, outcome: 1, prince2: -1 } },
+      { id: "many", label: "Many voices", sub: "Competing priorities and formal sign-off",
+        because: "Several stakeholders with competing priorities need to sign off",
+        dims: { stakeholder: 70, teamSize: 78, regulation: 72, risk: 62 }, s: { prince2: 2, per: 1, pmbok: 2, xp: -1, rad: -2 } }
+    ]
+  },
+  {
+    id: "delivery",
+    title: "How would results reach the people who use them?",
+    help: "",
+    options: [
+      { id: "final", label: "One complete delivery at the end",
+        because: "Results arrive in one complete delivery at the end",
+        dims: { delivery: 10, flow: 20 }, s: { cpm: 1, prince2: 1, agile: -2, scrum: -3, kanban: -2, rad: -1 } },
+      { id: "milestones", label: "In big milestones with approvals",
+        because: "You deliver in large milestones with approvals",
+        dims: { delivery: 30, regulation: 68, flow: 25 }, s: { prince2: 3, per: 2, npi: 1, scrum: -1, kanban: -1 } },
+      { id: "increments", label: "Small usable pieces every few weeks",
+        because: "You want usable pieces every few weeks",
+        dims: { delivery: 80, flow: 45 }, s: { scrum: 3, agile: 2, xp: 2, apf: 1, prince2: -1 } },
+      { id: "continuous", label: "Continuously, as each item is finished",
+        because: "You want to release continuously as items get finished",
+        dims: { delivery: 88, flow: 82 }, s: { kanban: 3, scrumban: 2, xp: 1, lean: 1, scrum: -1, prince2: -1 } },
+      { id: "prototypes", label: "As prototypes people can react to",
+        because: "You want to put prototypes in front of people early",
+        dims: { delivery: 75, experimentation: 78, uncertainty: 62 }, s: { rad: 3, apf: 1, agile: 1, npi: 1, prince2: -1 } }
+    ]
+  },
+  {
+    id: "arrival",
+    title: "How does new work usually show up?",
+    help: "",
+    options: [
+      { id: "upfront", label: "It's all known at the start",
+        because: "All the work is known from the start",
+        dims: { flow: 12, clarity: 70, change: 25 }, s: { cpm: 2, prince2: 1, kanban: -2, scrumban: -2 } },
+      { id: "cycles", label: "We plan it in cycles",
+        because: "You plan the work in regular cycles",
+        dims: { flow: 35, delivery: 68 }, s: { scrum: 3, agile: 1, xp: 1, kanban: -1 } },
+      { id: "stream", label: "A steady stream of requests",
+        because: "Work arrives as a steady stream of requests",
+        dims: { flow: 92, delivery: 72 }, s: { kanban: 3, scrumban: 2, lean: 1, scrum: -2, cpm: -1 } },
+      { id: "interrupted", label: "We plan, then urgent things interrupt",
+        because: "Urgent work regularly interrupts what you planned",
+        dims: { flow: 72, change: 72 }, s: { scrumban: 3, kanban: 2, scrum: -2, cpm: -1, prince2: -1 } },
+      { id: "unfolds", label: "It becomes clear as we learn",
+        because: "The work becomes clear only as you learn",
+        dims: { uncertainty: 78, experimentation: 70, clarity: 28 }, s: { apf: 3, rad: 1, agile: 1, cpm: -2, prince2: -1 } }
+    ]
+  },
+  {
+    id: "team",
+    title: "Who's doing the work?",
+    help: "",
+    options: [
+      { id: "solo", label: "Me, or two or three people",
+        because: "You're working with two or three people at most",
+        dims: { teamSize: 15, autonomy: 72, resources: 40 }, s: { kanban: 2, scrumban: 1, prince2: -2, pmbok: -1 } },
+      { id: "onecrew", label: "One team, focused on this project",
+        because: "One team is focused on this project",
+        dims: { teamSize: 35, autonomy: 70, resources: 78 }, s: { scrum: 3, xp: 2, rad: 2, agile: 1 } },
+      { id: "shared", label: "A team split across several projects",
+        because: "Your team is split across several projects",
+        dims: { teamSize: 40, resources: 18, autonomy: 45 }, s: { ccpm: 3, kanban: 2, scrumban: 2, scrum: -2 } },
+      { id: "crossfn", label: "Several areas working together",
+        because: "Several areas have to work together",
+        dims: { teamSize: 62, dependencies: 68, autonomy: 50 }, s: { per: 2, npi: 1, scrum: 1, cpm: 1, agile: 1 } },
+      { id: "large", label: "A large group with vendors or departments",
+        because: "A large group with vendors or departments is involved",
+        dims: { teamSize: 90, dependencies: 75, regulation: 68, risk: 65, autonomy: 30 }, s: { prince2: 2, cpm: 2, pmbok: 2, per: 1, xp: -2, rad: -2, scrum: -1 } }
+    ]
+  },
+  {
+    id: "autonomy",
+    title: "Who decides how the work gets organized?",
+    help: "",
+    options: [
+      { id: "team", label: "The team decides for itself",
+        because: "Your team organizes its own work",
+        dims: { autonomy: 90 }, s: { scrum: 2, xp: 2, agile: 2, kanban: 1, prince2: -2 } },
+      { id: "within", label: "The team decides within agreed limits",
+        because: "Your team decides within agreed limits",
+        dims: { autonomy: 65 }, s: { scrum: 1, scrumban: 1, agile: 1, apf: 1 } },
+      { id: "manager", label: "A manager plans, the team executes",
+        because: "A manager plans the work and the team executes it",
+        dims: { autonomy: 30 }, s: { cpm: 2, prince2: 1, ccpm: 1, scrum: -2, xp: -2 } },
+      { id: "external", label: "Plans need approval outside the team",
+        because: "Plans need approval from outside the team",
+        dims: { autonomy: 12, regulation: 72, teamSize: 65 }, s: { prince2: 2, per: 1, pmbok: 1, scrum: -2, xp: -2, rad: -2, agile: -1 } }
+    ]
+  },
+  {
+    id: "dependencies",
+    title: "How much do tasks depend on each other?",
+    help: "",
+    options: [
+      { id: "independent", label: "Barely", sub: "Most items can move on their own",
+        because: "Most of your tasks can move independently",
+        dims: { dependencies: 15 }, s: { kanban: 2, scrum: 1, xp: 1, rad: 1, cpm: -2, ccpm: -1 } },
+      { id: "some", label: "Some", sub: "A few things have to happen in order",
+        because: "A few things have to happen in a set order",
+        dims: { dependencies: 45 }, s: { scrum: 1, npi: 1, cpm: 1 } },
+      { id: "chained", label: "A lot", sub: "One delay pushes everything else",
+        because: "One delay would push everything else back",
+        dims: { dependencies: 88, risk: 62 }, s: { cpm: 3, prince2: 1, kanban: -1, scrumban: -1 } },
+      { id: "people", label: "People are the constraint", sub: "It's who's available, more than task order",
+        because: "Who's available matters more than the order of tasks",
+        dims: { dependencies: 55, resources: 15 }, s: { ccpm: 3, lean: 1, cpm: -1 } }
+    ]
+  },
+  {
+    id: "deadline",
+    title: "How fixed is the timeline?",
+    help: "",
+    options: [
+      { id: "hard", label: "The date cannot move", sub: "An event, a contract or a season depends on it",
+        because: "Your date cannot move",
+        dims: { timePressure: 92, risk: 62 }, s: { cpm: 3, ccpm: 2, npi: 1, prince2: 1 } },
+      { id: "target", label: "There's a target date with some room",
+        because: "You have a target date with some room",
+        dims: { timePressure: 60 }, s: { scrum: 1, prince2: 1, agile: 1 } },
+      { id: "flexible", label: "Time is flexible", sub: "Getting it right matters more",
+        because: "Getting it right matters more than a fixed date",
+        dims: { timePressure: 25 }, s: { kanban: 1, apf: 1, sixsigma: 1, lean: 1, cpm: -2, ccpm: -1 } },
+      { id: "asap", label: "As fast as possible", sub: "Speed is the point",
+        because: "Speed is the point for this project",
+        dims: { timePressure: 82, delivery: 75, experimentation: 62 }, s: { rad: 3, lean: 1, xp: 1, prince2: -2, pmbok: -1 } }
+    ]
+  },
+  {
+    id: "constraint",
+    title: "What's tightest on this project?",
+    help: "",
+    options: [
+      { id: "time", label: "The schedule",
+        because: "The schedule is your tightest constraint",
+        dims: { timePressure: 80 }, s: { cpm: 2, ccpm: 1, rad: 1 } },
+      { id: "money", label: "The budget",
+        because: "The budget is your tightest constraint",
+        dims: { budget: 88, efficiency: 72 }, s: { lean: 3, cpm: 1, ccpm: 1, pmbok: 1, xp: -1 } },
+      { id: "people", label: "The people available",
+        because: "Available people are your tightest constraint",
+        dims: { resources: 12, budget: 62 }, s: { ccpm: 3, kanban: 1, lean: 1, scrum: -1 } },
+      { id: "quality", label: "The quality bar", sub: "Errors would be costly or very visible",
+        because: "Errors would be costly, so the quality bar is tight",
+        dims: { quality: 88, risk: 70 }, s: { sixsigma: 3, xp: 3, lean: 1, rad: -2 } },
+      { id: "scope", label: "The scope", sub: "There's more to do than capacity allows",
+        because: "There's more scope than capacity to deliver it",
+        dims: { flow: 65, efficiency: 62, resources: 35 }, s: { kanban: 2, scrumban: 2, lean: 2 } }
+    ]
+  },
+  {
+    id: "governance",
+    title: "How much documentation and approval does this need?",
+    help: "",
+    options: [
+      { id: "light", label: "Almost none", sub: "We just need to get it done",
+        because: "You need almost no formal documentation",
+        dims: { regulation: 12 }, s: { kanban: 2, rad: 2, xp: 1, agile: 1, prince2: -3, pmbok: -3 } },
+      { id: "some", label: "Some reporting", sub: "Progress updates and basic records",
+        because: "You need light reporting and basic records",
+        dims: { regulation: 42 }, s: { scrum: 1, scrumban: 1, pmbok: -1 } },
+      { id: "formal", label: "Formal", sub: "Documented decisions, approvals, a paper trail",
+        because: "Decisions and approvals have to be documented",
+        dims: { regulation: 80, risk: 65 }, s: { prince2: 2, pmbok: 3, per: 1, xp: -2, rad: -2, kanban: -1 } },
+      { id: "regulated", label: "Regulated", sub: "Audits, compliance or contractual obligations",
+        because: "You work under audits or contractual obligations",
+        dims: { regulation: 95, risk: 80, quality: 70 }, s: { prince2: 3, pmbok: 3, sixsigma: 1, rad: -3, xp: -2, agile: -1 } }
+    ]
+  },
+  {
+    id: "worry",
+    title: "If something goes wrong, what would hurt most?",
+    help: "",
+    compact: true,
+    options: [
+      { id: "late", label: "Missing the date",
+        because: "Missing the date is what would hurt most",
+        dims: { timePressure: 75, risk: 60 }, s: { cpm: 3, ccpm: 2, prince2: 1 } },
+      { id: "defects", label: "Errors reaching customers",
+        because: "Errors reaching customers is what would hurt most",
+        dims: { quality: 88, risk: 70 }, s: { sixsigma: 3, xp: 2, lean: 1 } },
+      { id: "wrong", label: "Building the wrong thing",
+        because: "Building the wrong thing is what would hurt most",
+        dims: { uncertainty: 72, experimentation: 78, stakeholder: 65 }, s: { rad: 2, apf: 2, agile: 2, scrum: 1 } },
+      { id: "technical", label: "Technical problems or integrations",
+        because: "Technical problems and integrations are what would hurt most",
+        dims: { techComplexity: 88, risk: 65 }, s: { xp: 3, per: 1, rad: -1 } },
+      { id: "cost", label: "Going over budget",
+        because: "Going over budget is what would hurt most",
+        dims: { budget: 82, efficiency: 72 }, s: { lean: 2, ccpm: 2, cpm: 1, pmbok: 1 } },
+      { id: "adoption", label: "Nobody actually using it",
+        because: "Nobody adopting the result is what would hurt most",
+        dims: { behavior: 88, stakeholder: 70 }, s: { outcome: 3, per: 2, agile: 1 } },
+      { id: "chaos", label: "Losing track of everything in flight",
+        because: "Losing track of everything in flight is what would hurt most",
+        dims: { flow: 75, efficiency: 60 }, s: { kanban: 3, scrumban: 2, lean: 1 } },
+      { id: "compliance", label: "Failing an audit or a contract term",
+        because: "Failing an audit or a contract term is what would hurt most",
+        dims: { regulation: 88, risk: 82 }, s: { pmbok: 3, prince2: 2, sixsigma: 1, rad: -2 } }
+    ]
+  },
+  {
+    id: "success",
+    title: "How will you know the project succeeded?",
+    help: "",
+    options: [
+      { id: "onplan", label: "It landed on scope, time and budget",
+        because: "Success means landing on scope, time and budget",
+        dims: { regulation: 62, timePressure: 68, clarity: 65 }, s: { cpm: 2, prince2: 2, pmbok: 2, apf: -1 } },
+      { id: "works", label: "The thing works and people use it",
+        because: "Success means the result works and gets used",
+        dims: { delivery: 70, quality: 62, behavior: 60 }, s: { scrum: 1, agile: 1, xp: 1 } },
+      { id: "metric", label: "A number improves measurably",
+        because: "Success is a number that has to improve measurably",
+        dims: { quality: 72, efficiency: 70 }, s: { sixsigma: 3, lean: 2, outcome: 1 } },
+      { id: "behaviour", label: "People change how they work",
+        because: "Success means people change how they work",
+        dims: { behavior: 92, stakeholder: 72 }, s: { outcome: 3, per: 2, prince2: -1 } },
+      { id: "learn", label: "We learn whether the idea is worth pursuing",
+        because: "Success means learning whether the idea is worth pursuing",
+        dims: { experimentation: 88, uncertainty: 75, clarity: 30 }, s: { apf: 3, rad: 2, agile: 1, prince2: -2, cpm: -2 } }
+    ]
+  }
+];
+
+
+/* ==========================================================
+   THE 17 OPTIONS, CLASSIFIED BY WHAT THEY ACTUALLY ARE
+
+   layer:
+     philosophy – a set of principles (Agile, Lean, Six Sigma)
+     framework  – a way of organizing the work
+     technique  – a complementary method or tool
+     model      – a life-cycle model or specific process
+     standard   – a body of knowledge, used as reference
+
+   role      – how it contributes inside a combination
+   whenNot   – warning signs that it may be the wrong pick
+   ========================================================== */
+const METHODS = {
+  /* ---------- Philosophies ---------- */
+  agile: {
+    ref: { n: 2, anchor: "2-agile-methodology", label: "2. Agile methodology", note: "The guide presents Agile as a reaction to linear methods: collaborative, quick and open to data-driven change, with work pulled from a prioritized backlog." },
+    name: "Agile", layer: "philosophy", category: "Philosophy", emoji: "🔄",
+    tagline: "Deliver, learn, adjust. Repeat.",
+    role: "Agile sets the principles: deliver in small pieces, get feedback and change direction without derailing the project.",
+    whenNot: ["Scope, price and dates are fixed by contract and every change needs a formal amendment."],
+    start: [
+      ["Build one prioritized list", "Put everything in a single backlog and order it by value."],
+      ["Deliver in short increments", "Aim to show something usable every one to four weeks."],
+      ["Schedule feedback moments", "After each increment, review it with stakeholders and adjust."]
+    ],
+    learn: {
+      what: "A set of values and principles for iterative, collaborative work. It's not a process: Scrum, Kanban and XP are ways to put it into practice.",
+      bestFor: "Projects where requirements evolve and feedback matters.",
+      watchOut: "Without some structure, “being agile” turns into having no plan at all.",
+      example: ["Build a small piece", "Get feedback", "Adjust", "Build the next piece"],
+      exampleNote: "Launching a first version, then improving it every two weeks."
+    }
+  },
+  lean: {
+    ref: { n: 8, anchor: "8-lean-methodology", label: "8. Lean methodology", note: "The guide traces Lean to the Toyota Production System and its three wastes: muda (wastefulness), mura (unevenness) and muri (overburden)." },
+    name: "Lean", layer: "philosophy", category: "Philosophy", emoji: "✂️",
+    tagline: "More value. Less waste.",
+    role: "Lean sets the lens: keep what adds value for the customer and cut the waiting, rework and extra steps around it.",
+    whenNot: ["The problem is uncertainty about what to build, not inefficiency in how you build it."],
+    start: [
+      ["Map how value flows", "Draw every step from request to delivery and note how long each takes."],
+      ["Spot the waste", "Mark waiting times, handoffs, rework and steps nobody would pay for."],
+      ["Fix one bottleneck at a time", "Simplify the worst step, measure the result, then repeat."]
+    ],
+    learn: {
+      what: "A philosophy focused on delivering customer value while removing waste from the process.",
+      bestFor: "Work that feels slow, costly or bureaucratic.",
+      watchOut: "Cutting “waste” too aggressively can remove useful safeguards.",
+      example: ["Request", "3-day approval wait", "Work", "Delivery"],
+      exampleNote: "Removing the approval wait means delivering three days sooner."
+    }
+  },
+  sixsigma: {
+    ref: { n: 14, anchor: "14-six-sigma", label: "14. Six Sigma", note: "The guide describes the DMAIC cycle (define, measure, analyze, improve, control) and says Six Sigma is applied alongside other methods rather than replacing them." },
+    name: "Six Sigma", layer: "philosophy", category: "Philosophy", emoji: "🎯",
+    tagline: "Fewer defects. Decisions backed by data.",
+    role: "Six Sigma sets the discipline: measure the errors, find their root cause and reduce variation instead of guessing.",
+    whenNot: ["There's no existing process to measure yet, or no reliable data to work from."],
+    start: [
+      ["Define and measure one defect", "Choose one recurring error and count how often it happens."],
+      ["Find the root cause", "Use your data, a fishbone diagram or the “5 Whys”."],
+      ["Improve, then control", "Test a fix, then add checks so the improvement lasts."]
+    ],
+    learn: {
+      what: "A data-driven approach for reducing defects and variation, usually following the DMAIC cycle.",
+      bestFor: "Existing processes with measurable, recurring errors.",
+      watchOut: "Overkill for small projects, and it needs reliable data to work.",
+      example: ["Define: invoice errors", "Measure: 8%", "Analyze", "Improve", "Control"],
+      exampleNote: "Cutting billing mistakes by finding where they start."
+    }
+  },
+
+  /* ---------- Frameworks ---------- */
+  scrum: {
+    ref: { n: 3, anchor: "3-scrum-methodology", label: "3. Scrum methodology", note: "The guide says Scrum is a form of Agile and closer to a framework than a methodology: sprints of one to two weeks, a Scrum Master, and a retrospective before the next sprint." },
+    name: "Scrum", layer: "framework", category: "Framework", emoji: "🏉",
+    tagline: "Short cycles. Clear goals. Constant improvement.",
+    role: "Scrum gives you structure through fixed work cycles, a clear goal per cycle and a review at the end of each one.",
+    alsoIf: "This fits if your team can protect a planning rhythm with few interruptions.",
+    whenNot: [
+      "Urgent requests interrupt the team constantly, so sprints keep breaking.",
+      "The team can't commit to a cycle because people are pulled onto other projects."
+    ],
+    start: [
+      ["Name two key roles", "Someone owns what gets built; someone protects how the team works."],
+      ["Run a two-week cycle", "Plan at the start, hold a short daily check-in, review at the end."],
+      ["Hold a retrospective", "After each cycle, pick one thing to improve in the next one."]
+    ],
+    learn: {
+      what: "A framework that delivers work in fixed-length cycles with defined roles and events.",
+      bestFor: "Building something step by step with a dedicated team.",
+      watchOut: "Constant interruptions break the cycles. It needs a stable team.",
+      example: ["Cycle 1: Homepage", "Cycle 2: Booking", "Cycle 3: Payments"],
+      exampleNote: "A booking site built and reviewed one cycle at a time."
+    }
+  },
+  scrumban: {
+    ref: { n: 5, anchor: "5-scrumban-methodology", label: "5. Scrumban methodology", note: "The guide calls Scrumban a hybrid: pull from the backlog by capacity as in Kanban, while keeping planning, reviews and retrospectives from Scrum." },
+    name: "Scrumban", layer: "framework", category: "Framework", emoji: "🔀",
+    tagline: "Structure when you need it. Flexibility when things change.",
+    role: "Scrumban gives you a planning rhythm without pretending the plan will survive: work is pulled continuously, with regular reviews.",
+    alsoIf: "This fits if planned work and unexpected requests keep colliding.",
+    whenNot: [
+      "Nothing interrupts your plan, in which case plain cycles are simpler.",
+      "Nobody enforces limits on work in progress, so it drifts into “everything at once”."
+    ],
+    start: [
+      ["Create a visual workflow", "Backlog → Ready → Doing → Review → Done."],
+      ["Set work-in-progress limits", "Cap how many items each column or person holds at once."],
+      ["Plan regularly, pull continuously", "Keep planning and review sessions, but let the team pull by capacity."]
+    ],
+    learn: {
+      what: "A hybrid of Scrum and Kanban: a planning rhythm plus continuous flow.",
+      bestFor: "Teams doing new work and ongoing support at the same time.",
+      watchOut: "It drifts into “no rules” when planning sessions get skipped.",
+      example: ["Weekly planning", "Pull from Ready", "Fast lane for urgent", "Review"],
+      exampleNote: "Shipping features while fixing what users report."
+    }
+  },
+  xp: {
+    ref: { n: 6, anchor: "6-extreme-programming-xp-methodology", label: "6. eXtreme programming (XP) methodology", note: "The guide highlights XP's five values (simplicity, communication, feedback, respect and courage) and notes it suits a small, co-located team." },
+    name: "Extreme Programming (XP)", short: "XP", layer: "framework", category: "Framework", emoji: "💻",
+    tagline: "Change software safely through engineering discipline.",
+    role: "XP adds the engineering practices that let code change often without breaking: tests first, small releases, continuous integration.",
+    alsoIf: "This fits if technical quality is what limits how fast you can move.",
+    whenNot: [
+      "The work isn't software, so most of the practices don't apply.",
+      "Developers aren't on board with pairing and test-first, which the practices depend on."
+    ],
+    start: [
+      ["Write tests before code", "Start with automated tests for your most critical features."],
+      ["Integrate every day", "Merge and test at least daily to catch problems early."],
+      ["Try pair programming", "Pair on the riskiest tasks and rotate pairs."]
+    ],
+    learn: {
+      what: "A software framework built on engineering practices: test-driven development, pairing, continuous integration, small releases.",
+      bestFor: "Software teams where both quality and change matter.",
+      watchOut: "Needs strong developer buy-in, and pairing feels slow at first.",
+      example: ["Write a test", "Write the code", "Refactor", "Release small"],
+      exampleNote: "Adding checkout with tests protecting the payment flow."
+    }
+  },
+  apf: {
+    ref: { n: 7, anchor: "7-adaptive-project-framework-apf-methodology", label: "7. Adaptive project framework (APF) methodology", note: "The guide builds APF around the inevitability of change: anticipate risks, re-evaluate results constantly, and be clear about your conditions of satisfaction." },
+    name: "Adaptive Project Framework (APF)", short: "APF", layer: "framework", category: "Framework", emoji: "🧭",
+    tagline: "Know the destination. Discover the route.",
+    role: "APF keeps the goal fixed and the scope open: after each cycle you decide with stakeholders what to keep, drop or try next.",
+    alsoIf: "This fits if the goal is agreed but the solution is still an open question.",
+    whenNot: [
+      "You need to promise a fixed scope and price upfront.",
+      "Stakeholders can't be available to re-decide scope after each cycle."
+    ],
+    start: [
+      ["Define the goal, not the solution", "Write what success looks like and leave the “how” open."],
+      ["Plan one short cycle at a time", "Pick what's most likely to move you toward the goal."],
+      ["Re-scope with stakeholders", "After each cycle, decide together what to keep, drop or try."]
+    ],
+    learn: {
+      what: "A framework that treats scope as flexible and re-decides it after every cycle based on what you learned.",
+      bestFor: "A clear goal with an uncertain solution.",
+      watchOut: "Needs engaged stakeholders and tolerance for an open scope.",
+      example: ["Goal: +20% bookings", "Cycle 1: new form", "Review results", "Cycle 2: adjust"],
+      exampleNote: "Improving conversions without knowing yet which change works."
+    }
+  },
+  prince2: {
+    ref: { n: 16, anchor: "16-prince2-methodology", label: "16. PRINCE2 methodology", note: "The guide describes PRINCE2 as both a methodology and a certification, guided by seven principles and seven processes, and warns about tailoring it until it's PRINCE in name only." },
+    name: "PRINCE2", layer: "framework", category: "Framework", emoji: "🏛️",
+    tagline: "Controlled stages. Clear roles. Justified decisions.",
+    role: "PRINCE2 gives you governance: defined roles, controlled stages and a business case that has to stay valid to continue.",
+    alsoIf: "This fits if approvals and accountability need to be explicit.",
+    whenNot: [
+      "The team is small and the overhead would cost more than it protects.",
+      "The work changes weekly, so stage plans go stale before they're approved."
+    ],
+    start: [
+      ["Build the business case", "Explain why the project is worth doing, and keep it updated."],
+      ["Set up a project board", "Clarify who decides, who manages and who delivers."],
+      ["Plan in stages with approvals", "Review progress and the business case before each new stage."]
+    ],
+    learn: {
+      what: "A process-based method with defined roles, controlled stages and constant business justification.",
+      bestFor: "Large organizations, public sector, contracts needing formal governance.",
+      watchOut: "Feels bureaucratic for small, fast-moving teams.",
+      example: ["Start up", "Initiate", "Stage 1", "Stage review", "Stage 2", "Close"],
+      exampleNote: "A public portal where each stage needs board approval."
+    }
+  },
+  per: {
+    ref: { n: 12, anchor: "12-package-enabled-reengineering-per", label: "12. Package enabled reengineering (PER)", note: "The guide describes PER as redesigning products or processes with fresh eyes, transforming the business through process redesign or realignment of people." },
+    name: "Package Enabled Reengineering (PER)", short: "PER", layer: "framework", category: "Framework", emoji: "⚙️",
+    tagline: "Redesign the process. Let the system power it.",
+    role: "PER treats the new system as the trigger to redesign how work is done, instead of automating the old habits.",
+    alsoIf: "This fits if new software is meant to change how the organization operates.",
+    whenNot: [
+      "You're building software rather than adopting it.",
+      "Nobody has the authority to change the processes the system touches."
+    ],
+    start: [
+      ["Map the current process", "Document how work flows today and where it breaks."],
+      ["Design around the tool", "Start from the system's standard way of working before customizing."],
+      ["Plan for people, not just systems", "Train users, update roles and switch over in phases."]
+    ],
+    learn: {
+      what: "An approach to business transformation: redesigning products, processes or roles with fresh eyes, usually around a packaged system such as an ERP, CRM or HR platform.",
+      bestFor: "System implementations meant to modernize operations.",
+      watchOut: "Heavy customization to copy the old process defeats the purpose.",
+      example: ["Paper requests", "Adopt the platform", "Redesign approvals", "Go live"],
+      exampleNote: "Replacing spreadsheets and emails with one system."
+    }
+  },
+  rad: {
+    ref: { n: 17, anchor: "17-rapid-application-development-rad-methodology", label: "17. Rapid application development (RAD) methodology", note: "The guide describes RAD as rapid prototype releases and iterations that value user feedback over strict planning, and warns it suits small, experienced teams." },
+    name: "Rapid Application Development (RAD)", short: "RAD", layer: "framework", category: "Framework", emoji: "⚡",
+    tagline: "Prototype fast. Learn faster.",
+    role: "RAD replaces long specifications with prototypes: you find out what people need by putting something in front of them.",
+    alsoIf: "This fits if you'd learn more from a prototype than from another planning round.",
+    whenNot: [
+      "The system is large, regulated or heavily integrated.",
+      "Users aren't available to react to prototypes quickly."
+    ],
+    start: [
+      ["Build a quick prototype", "A clickable mockup or no-code version, not a finished product."],
+      ["Test it with real users", "Watch three to five people use it and note where they get stuck."],
+      ["Iterate, then build", "Refine in quick rounds before investing in the final version."]
+    ],
+    learn: {
+      what: "A software approach favoring rapid prototyping and user feedback over upfront planning.",
+      bestFor: "Validating quickly what users actually need.",
+      watchOut: "Poor fit for large, complex or strictly regulated systems.",
+      example: ["Prototype", "User feedback", "New prototype", "Build"],
+      exampleNote: "Testing three booking flows before coding the real one."
+    }
+  },
+
+  /* ---------- Techniques ---------- */
+  kanban: {
+    ref: { n: 4, anchor: "4-kanban-methodology", label: "4. Kanban methodology", note: "The guide describes a board where work is pulled continuously as the team has capacity, with work-in-progress limits to keep focus and make bottlenecks visible." },
+    name: "Kanban", layer: "technique", category: "Technique", emoji: "📋",
+    tagline: "See the work. Limit the chaos.",
+    role: "Kanban can help you see the whole flow on one board and limit how much is in progress at the same time.",
+    start: [
+      ["Map your real workflow", "To do → In progress → Review → Done, using your actual steps."],
+      ["Set work-in-progress limits", "Cap each column, for example three items “In progress”."],
+      ["Review the flow weekly", "Find what gets stuck and fix the bottleneck, not the people."]
+    ],
+    learn: {
+      what: "A visual method for managing continuous work by limiting work in progress.",
+      bestFor: "Continuous incoming work: tickets, requests, content, support.",
+      watchOut: "Without limits it's just a to-do board, and long-term planning needs extra care.",
+      example: ["Request", "Ready", "In progress", "Review", "Done"],
+      exampleNote: "A team handling bug reports as they arrive."
+    }
+  },
+  cpm: {
+    ref: { n: 9, anchor: "9-critical-path-method", label: "9. Critical path method", note: "The guide's steps: list the essential tasks, estimate durations and dependencies, and schedule the longest sequence, which defines the project's timeframe." },
+    name: "Critical Path Method (CPM)", short: "Critical Path", layer: "technique", category: "Technique", emoji: "🛤️",
+    tagline: "Find the tasks that decide your deadline.",
+    role: "Critical Path can show you which chain of tasks actually sets your end date, so you protect those instead of everything.",
+    start: [
+      ["List tasks and durations", "Break the work down and estimate each piece."],
+      ["Map the dependencies", "Mark what must finish before something else starts."],
+      ["Guard the critical path", "Track the longest chain closely: a delay there delays everything."]
+    ],
+    learn: {
+      what: "A scheduling technique that finds the sequence of dependent tasks setting the minimum project duration.",
+      bestFor: "Deadline-driven work with many dependencies.",
+      watchOut: "Relies on good estimates and ignores whether people are overloaded.",
+      example: ["Content", "Design", "Build", "QA", "Launch"],
+      exampleNote: "If design slips three days, the launch slips three days."
+    }
+  },
+  ccpm: {
+    ref: { n: 10, anchor: "10-critical-chain-project-management", label: "10. Critical chain project management", note: "The guide presents CCPM as the critical path made realistic, with buffers that absorb delays and resourcing issues without derailing the whole project." },
+    name: "Critical Chain Project Management (CCPM)", short: "Critical Chain", layer: "technique", category: "Technique", emoji: "⛓️",
+    tagline: "Protect your people, not just your tasks.",
+    role: "Critical Chain can help when people are the bottleneck: it cuts multitasking and pools safety time into one shared buffer.",
+    start: [
+      ["Find your bottleneck resource", "Identify who everyone ends up waiting on."],
+      ["Cut multitasking", "Let key people finish one task before starting the next."],
+      ["Pool your safety time", "Trim padding from individual tasks into one buffer at the end."]
+    ],
+    learn: {
+      what: "A scheduling method built around resource availability, using shared buffers instead of padded estimates.",
+      bestFor: "Shared or limited people with firm deadlines.",
+      watchOut: "Leaders have to accept buffers and stop constant task switching.",
+      example: ["One designer, 3 projects", "Sequence the work", "Add a buffer", "Watch the buffer"],
+      exampleNote: "An agency where one specialist supports every client."
+    }
+  },
+  outcome: {
+    ref: { n: 13, anchor: "13-outcome-mapping", label: "13. Outcome mapping", note: "The guide notes Outcome Mapping came from the IDRC and measures influence and lasting behavioural change instead of deliverables." },
+    name: "Outcome Mapping", layer: "technique", category: "Technique", emoji: "🗺️",
+    tagline: "Measure change in people, not just outputs.",
+    role: "Outcome Mapping can keep you honest about adoption: it tracks changes in what people actually do, not just what you delivered.",
+    start: [
+      ["Identify your key partners", "List the people or groups whose behavior has to change."],
+      ["Define progress markers", "Describe what you'd expect, like and love to see them doing."],
+      ["Observe and record", "Track the changes you see and adjust your strategy."]
+    ],
+    learn: {
+      what: "A planning and monitoring approach that defines success as changes in behavior and relationships.",
+      bestFor: "Adoption, training, change programs and social impact.",
+      watchOut: "Less useful when the goal is a concrete technical deliverable.",
+      example: ["Goal: teams use the tool weekly", "Training", "Coaching", "Observe adoption"],
+      exampleNote: "A rollout measured by habits, not by attendance."
+    }
+  },
+
+  /* ---------- Models / processes ---------- */
+  waterfall: {
+    ref: { n: 1, anchor: "1-waterfall-methodology", label: "1. Waterfall methodology", note: "The guide lists the classic sequence (requirements, analysis, design, construction, testing, deployment and maintenance) and warns there is no going back once a stage is finished." },
+    name: "Waterfall", layer: "model", category: "Life-cycle model", emoji: "🌊",
+    tagline: "Plan it once. Build it step by step.",
+    role: "Waterfall is the life-cycle shape that fits here: finish each phase before opening the next one.",
+    whenNot: [
+      "Requirements turn out to be less settled than they look.",
+      "Problems would only surface at the testing phase, when fixing them is expensive."
+    ],
+    start: [
+      ["Lock the scope in writing", "Document requirements and get sign-off before work begins."],
+      ["Break the project into phases", "Requirements → Design → Build → Test → Launch."],
+      ["Agree on a change rule", "Decide now how late changes get reviewed, approved and priced."]
+    ],
+    learn: {
+      what: "A sequential life-cycle model where each phase is finished before the next starts.",
+      bestFor: "Fixed requirements with little expected change.",
+      watchOut: "Late changes are expensive and problems appear late.",
+      example: ["Requirements", "Analysis", "Design", "Construction", "Testing", "Deployment"],
+      exampleNote: "A defined build with approved scope and design."
+    }
+  },
+  npi: {
+    ref: { n: 11, anchor: "11-new-product-introduction-npi", label: "11. New product introduction (NPI)", note: "The guide's stage-gate sequence: define the spec, assess feasibility, prototype, validate, manufacture and evaluate the product's success after launch." },
+    name: "New Product Introduction (NPI)", short: "NPI", layer: "model", category: "Process", emoji: "🚀",
+    tagline: "From idea to market, one gate at a time.",
+    role: "NPI is the process around the launch: concept, validation, production and go-to-market, with a go / no-go decision at each gate.",
+    whenNot: [
+      "You're improving an existing product rather than introducing a new one.",
+      "The gates turn into paperwork instead of real decisions."
+    ],
+    start: [
+      ["Write a one-page product brief", "The problem, the target customer and the business case."],
+      ["Set stage gates", "Concept → Validation → Development → Production → Launch."],
+      ["Plan the launch early", "Involve marketing, sales and operations from the start."]
+    ],
+    learn: {
+      what: "A structured process for taking a new product from concept to commercial launch.",
+      bestFor: "Product launches, physical or digital.",
+      watchOut: "Slows down when the gates become bureaucracy.",
+      example: ["Concept", "Prototype", "Validate", "Produce", "Launch"],
+      exampleNote: "A brand launching its first product line."
+    }
+  },
+
+  /* ---------- Standard ---------- */
+  pmbok: {
+    ref: { n: 15, anchor: "15-pmis-pmbok", label: "15. PMI's PMBOK", note: "The guide is explicit that PMBOK is not a methodology in itself: it's a best-practice guide and the basis of the PMP certification." },
+    name: "PMI / PMBOK", layer: "standard", category: "Standard", emoji: "📚",
+    tagline: "A reference shelf, not a recipe.",
+    role: "PMBOK is worth keeping as a reference for the formal side: risk, budget, scope, schedule, stakeholders and communication.",
+    start: [
+      ["Write a project charter", "Objectives, scope, budget, key stakeholders, success criteria."],
+      ["Create risk and stakeholder registers", "Main risks with owners, and who needs what information."],
+      ["Set up a communication plan", "Agree on reports, meetings and decision paths from day one."]
+    ],
+    learn: {
+      what: "A body of knowledge from PMI describing standard practices. It's a reference you borrow from, not a method you follow step by step.",
+      bestFor: "Adding formal management of risk, cost, scope and stakeholders to whatever you're already doing.",
+      watchOut: "Applying every process to a small project creates pure overhead.",
+      example: ["Charter", "Risk register", "Stakeholder plan", "Status reporting"],
+      exampleNote: "Borrowing the parts your project actually needs."
+    }
+  }
+};
+
+/* ==========================================================
+   MANAGEMENT APPROACH (first layer of the result)
+   ========================================================== */
+const APPROACHES = {
+  predictive: {
+    name: "Predictive", emoji: "📐",
+    tagline: "Plan first, then execute against the plan.",
+    what: "Your project can be defined upfront, so the value is in planning it well and protecting the plan.",
+    role: "A predictive approach means the plan comes first and changes go through a decision, not a shrug.",
+    whenNot: "This stops working the moment requirements turn out to be less settled than they looked."
+  },
+  adaptive: {
+    name: "Adaptive", emoji: "🌱",
+    tagline: "Decide as you learn, in short cycles.",
+    what: "Too much is still open to plan it all upfront, so the value is in short cycles and frequent feedback.",
+    role: "An adaptive approach means the plan is rebuilt regularly from what you just learned.",
+    whenNot: "This gets uncomfortable when someone needs a fixed scope, date and price agreed in advance."
+  },
+  hybrid: {
+    name: "Hybrid", emoji: "🧩",
+    tagline: "Plan the frame, adapt the content.",
+    what: "Parts of your project need firm planning and parts of it will keep moving, so you need both at once.",
+    role: "A hybrid approach means planning the boundaries firmly while leaving room to adapt inside them.",
+    whenNot: "This turns into the worst of both worlds if nobody states clearly which parts are fixed and which are open."
+  }
+};
+
+/* ==========================================================
+   PROFILE BARS
+   Each bar is the average of the listed dimensions.
+   "!dim" means the inverse of that dimension (100 - value).
+   ========================================================== */
+const BARS = [
+  { id: "adaptability", label: "Adaptability", tag: "ADAPTIVE",
+    dims: ["change", "uncertainty", "!clarity", "delivery", "experimentation"] },
+  { id: "predictability", label: "Predictability", tag: "PREDICTABLE",
+    dims: ["clarity", "!change", "!uncertainty", "dependencies", "!experimentation"] },
+  { id: "structure", label: "Structure", tag: "STRUCTURED",
+    dims: ["regulation", "teamSize", "dependencies", "!autonomy", "risk"] },
+  { id: "collaboration", label: "Collaboration", tag: "HIGH COLLABORATION",
+    dims: ["stakeholder", "autonomy", "delivery", "behavior"] },
+  { id: "control", label: "Control", tag: "CONTROL-DRIVEN",
+    dims: ["regulation", "quality", "risk", "budget", "timePressure"] },
+  { id: "experimentation", label: "Experimentation", tag: "EXPLORATORY",
+    dims: ["experimentation", "uncertainty", "!clarity"] }
+];
+
+/* ==========================================================
+   WORD MAP (intro screen)
+   size 1-4 is purely visual; face "serif" renders in italic.
+   ========================================================== */
+const WORDMAP = [
+  { key: "kanban", size: 3 },
+  { key: "waterfall", size: 2 },
+  { key: "sixsigma", size: 4, face: "serif" },
+  { key: "per", size: 1 },
+  { key: "agile", size: 4, face: "serif" },
+  { key: "prince2", size: 3 },
+  { key: "cpm", size: 2 },
+  { key: "outcome", size: 1 },
+  { key: "scrum", size: 3 },
+  { key: "xp", size: 3, label: "Extreme Programming" },
+  { key: "apf", size: 2 },
+  { key: "scrumban", size: 3 },
+  { key: "rad", size: 2 },
+  { key: "lean", size: 4, face: "serif" },
+  { key: "npi", size: 1 },
+  { key: "ccpm", size: 2 },
+  { key: "pmbok", size: 1 }
+];
+
+const SOURCE = {
+  text: "The 17 options and their descriptions follow Teamwork's Project Management Methodologies guide (last updated 8 September 2026). Each card links to its section.",
+  url: "https://www.teamwork.com/project-management-guide/project-management-methodologies/",
+  label: "Read the guide",
+  disclaimer: "The questions, the scoring and the layered profile are this tool's own work. Teamwork did not create, review or endorse it."
+};
+
+const refURL = key => METHODS[key].ref ? SOURCE.url + "#" + METHODS[key].ref.anchor : SOURCE.url;
+
+
+/* ==========================================================
+   LANGUAGE
+
+   English lives in data.js / methods.js. This file holds the
+   Spanish overrides plus the shared interface strings.
+   Anything missing in Spanish falls back to English.
+   ========================================================== */
+let LANG = "en";
+
+const UI = {
+  en: {
+    htmlTitle: "Build Your Project Management Approach",
+    title: "Build Your Project Management Approach",
+    lead: "Not sure which approach fits your project?",
+    intro: "Answer a few questions about your project, team and constraints. Instead of crowning one winner, you'll get a profile: an approach, a philosophy, a framework and the techniques that could support them.",
+    start: "Start the test →",
+    time: "Takes about 3 minutes.",
+    mapCaption: "The 17 options behind this test, and they are not the same kind of thing. Tap any name.",
+    mapAria: "Project management approaches",
+    emptyHint: "Tap any name to see what it is, and what kind of thing it is.",
+    close: "Close",
+    langLabel: "Language",
+
+    question: "Question {0} of {1}",
+    progressAria: "Test progress",
+    timeLeft: "About {0} min left",
+    almostDone: "Almost done",
+    back: "← Back",
+    next: "Continue",
+    seeResult: "See my profile",
+    selectFirst: "Select an answer to continue.",
+    kbdHint: "Use arrow keys or numbers, then Enter",
+
+    kicker: "Your profile",
+    approachSuffix: "approach",
+    readNote: "{0} — based on {1} answers, not a diagnosis.",
+    read1: "Worth exploring",
+    read2: "Good read",
+    read3: "Clear read",
+
+    stackTitle: "Your stack",
+    stackNote: "Different kinds of things, working at different levels.",
+    whyTitle: "Why this fits you",
+    profileTitle: "Your project profile",
+    profileNote: "Readings from your answers, not scores to maximize.",
+    comboTitle: "How the pieces work together",
+    startTitle: "How could you start?",
+    withTech: "With {0}:",
+    warnTitle: "When this may not fit",
+
+    lApproach: "Approach",
+    lPhilosophy: "Philosophy",
+    lFramework: "Framework",
+    lTechnique: "Technique",
+    lAlsoUseful: "Also useful",
+    lReference: "Reference",
+    noPhilosophy: "Not needed as a main layer",
+    noPhilosophyNote: "No single school of thought stands out from your answers, and forcing one would add vocabulary without adding value.",
+    noTechnique: "None needed on top",
+    noTechniqueNote: "Your answers don't point to a specific technique yet. Add one when a concrete problem appears.",
+    weakFramework: "No framework stands out strongly here. Treat this as the closest fit, not a requirement.",
+
+    learnAbout: "Learn about {0}",
+    whatItIs: "What it is",
+    bestFor: "Best for",
+    watchOut: "Watch out for",
+    simpleExample: "Simple example",
+    exampleAria: "Example flow",
+    reference: "Teamwork guide, section {0} ↗",
+    guideSays: "What the guide says",
+
+    alsoConsider: "Also consider",
+    altWhy: "It came close because of one thing in particular: {0}.",
+    closeCall: "Your answers also sit close to the line between approaches, so a more {0} setup is a reasonable experiment.",
+    morePredictive: "predictive",
+    moreAdaptive: "adaptive",
+
+    whyNotOne: "Why not just one methodology?",
+    whyNotBody1: "Because the 17 options aren't the same kind of thing. Agile is a set of principles, Scrum is a framework, Kanban is a method for managing flow, Critical Path is a scheduling technique, Waterfall is a life-cycle model and PMBOK is a body of knowledge. Picking “one winner” among them is like choosing between a diet, a recipe and a knife.",
+    whyNotBody2: "That's why this result is a stack rather than a name. Layers combine: a framework can run inside a predictive approach, and a technique can support any framework.",
+
+    lessonBig: "You don't have to pick a side.",
+    lessonMid: "Teams build their own way of working by combining principles, frameworks and techniques as the context asks for them.",
+    lessonSmall: "This recommendation is a guide for exploring how to manage your project. No framework replaces reading your context, your team and your real constraints.",
+
+    copy: "Copy my profile",
+    copied: "Copied ✓",
+    copiedStatus: "Copied to your clipboard",
+    copyManual: "Copy isn't available here. Select the text below and copy it.",
+    copyLabel: "Your profile text",
+    retake: "Retake test",
+    edit: "Change my answers",
+
+    shareTitle: "My project management profile",
+    shareApproach: "Approach",
+    sharePhilosophy: "Philosophy",
+    shareFramework: "Framework",
+    shareEnd: "What's yours?",
+
+    sourceText: "The 17 options and their descriptions follow Teamwork's Project Management Methodologies guide. Every card links to its section.",
+    sourceLink: "Read the guide",
+    sourceNote: "The questions, the scoring and the layered profile are this tool's own work. Teamwork did not create, review or endorse it.",
+    announceProfile: "Your profile: {0} approach with {1}."
+  },
+
+  es: {
+    htmlTitle: "Construye tu enfoque de gestión de proyectos",
+    title: "Construye tu enfoque de gestión de proyectos",
+    lead: "¿No sabes qué enfoque le queda a tu proyecto?",
+    intro: "Responde algunas preguntas sobre tu proyecto, tu equipo y tus restricciones. En lugar de coronar a un ganador, obtendrás un perfil: un enfoque, una filosofía, un framework y las técnicas que podrían acompañarlos.",
+    start: "Comenzar el test →",
+    time: "Toma unos 3 minutos.",
+    mapCaption: "Las 17 opciones detrás de este test, y no son todas el mismo tipo de cosa. Toca cualquier nombre.",
+    mapAria: "Enfoques de gestión de proyectos",
+    emptyHint: "Toca cualquier nombre para ver qué es, y qué tipo de cosa es.",
+    close: "Cerrar",
+    langLabel: "Idioma",
+
+    question: "Pregunta {0} de {1}",
+    progressAria: "Avance del test",
+    timeLeft: "Quedan unos {0} min",
+    almostDone: "Ya casi",
+    back: "← Atrás",
+    next: "Continuar",
+    seeResult: "Ver mi perfil",
+    selectFirst: "Elige una respuesta para continuar.",
+    kbdHint: "Usa las flechas o los números, luego Enter",
+
+    kicker: "Tu perfil",
+    approachSuffix: "",
+    readNote: "{0}, a partir de {1} respuestas. No es un diagnóstico.",
+    read1: "Vale la pena explorarlo",
+    read2: "Lectura sólida",
+    read3: "Lectura clara",
+
+    stackTitle: "Tu combinación",
+    stackNote: "Cosas de distinto tipo, trabajando en distintos niveles.",
+    whyTitle: "Por qué encaja contigo",
+    profileTitle: "El perfil de tu proyecto",
+    profileNote: "Lecturas de tus respuestas, no puntajes que haya que maximizar.",
+    comboTitle: "Cómo se combinan las piezas",
+    startTitle: "¿Cómo podrías empezar?",
+    withTech: "Con {0}:",
+    warnTitle: "Cuándo podría no funcionarte",
+
+    lApproach: "Enfoque",
+    lPhilosophy: "Filosofía",
+    lFramework: "Framework",
+    lTechnique: "Técnica",
+    lAlsoUseful: "También útil",
+    lReference: "Referencia",
+    noPhilosophy: "No hace falta como capa principal",
+    noPhilosophyNote: "Ninguna corriente destaca en tus respuestas, y forzar una agregaría vocabulario sin agregar valor.",
+    noTechnique: "Ninguna necesaria por ahora",
+    noTechniqueNote: "Tus respuestas todavía no apuntan a una técnica concreta. Agrega una cuando aparezca un problema específico.",
+    weakFramework: "Aquí ningún framework destaca con fuerza. Tómalo como lo más cercano, no como un requisito.",
+
+    learnAbout: "Conocer {0}",
+    whatItIs: "Qué es",
+    bestFor: "Ideal para",
+    watchOut: "Cuidado con",
+    simpleExample: "Ejemplo simple",
+    exampleAria: "Flujo de ejemplo",
+    reference: "Guía de Teamwork, sección {0} ↗",
+    guideSays: "Lo que dice la guía",
+
+    alsoConsider: "También considera",
+    altWhy: "Quedó cerca sobre todo por una cosa: {0}.",
+    closeCall: "Tus respuestas también quedan cerca de la frontera entre enfoques, así que probar algo más {0} es un experimento razonable.",
+    morePredictive: "predictivo",
+    moreAdaptive: "adaptativo",
+
+    whyNotOne: "¿Por qué no una sola metodología?",
+    whyNotBody1: "Porque las 17 opciones no son el mismo tipo de cosa. Agile es un conjunto de principios, Scrum es un framework, Kanban es un método para gestionar el flujo, la Ruta Crítica es una técnica de planificación, Cascada es un modelo de ciclo de vida y PMBOK es un cuerpo de conocimiento. Elegir “un ganador” entre ellos es como elegir entre una dieta, una receta y un cuchillo.",
+    whyNotBody2: "Por eso el resultado es una combinación y no un nombre. Las capas se suman: un framework puede vivir dentro de un enfoque predictivo, y una técnica puede acompañar a cualquier framework.",
+
+    lessonBig: "No tienes que elegir bando.",
+    lessonMid: "Los equipos construyen su propia forma de trabajar combinando principios, frameworks y técnicas según lo que pide el contexto.",
+    lessonSmall: "Esta recomendación es una guía para explorar cómo gestionar tu proyecto. Ningún framework sustituye leer tu contexto, tu equipo y tus restricciones reales.",
+
+    copy: "Copiar mi perfil",
+    copied: "Copiado ✓",
+    copiedStatus: "Copiado al portapapeles",
+    copyManual: "Aquí no se puede copiar automáticamente. Selecciona el texto y cópialo.",
+    copyLabel: "El texto de tu perfil",
+    retake: "Repetir el test",
+    edit: "Cambiar mis respuestas",
+
+    shareTitle: "Mi perfil de gestión de proyectos",
+    shareApproach: "Enfoque",
+    sharePhilosophy: "Filosofía",
+    shareFramework: "Framework",
+    shareEnd: "¿Y el tuyo?",
+
+    sourceText: "Las 17 opciones y sus descripciones siguen la guía Project Management Methodologies de Teamwork. Cada ficha enlaza a su sección.",
+    sourceLink: "Leer la guía",
+    sourceNote: "Las preguntas, la puntuación y el perfil por capas son trabajo propio de esta herramienta. Teamwork no la creó, revisó ni avaló.",
+    announceProfile: "Tu perfil: enfoque {0} con {1}."
+  }
+};
+
+function t(key) {
+  let s = (UI[LANG] && UI[LANG][key] !== undefined) ? UI[LANG][key] : UI.en[key];
+  for (let i = 1; i < arguments.length; i++) s = s.split("{" + (i - 1) + "}").join(arguments[i]);
+  return s;
+}
+
+/* ---------- Spanish content ---------- */
+const ES_CATEGORY = {
+  Philosophy: "Filosofía", Framework: "Framework", Technique: "Técnica",
+  "Life-cycle model": "Modelo de ciclo de vida", Process: "Proceso", Standard: "Estándar"
+};
+
+const ES_BARS = {
+  adaptability: { label: "Adaptabilidad", tag: "ADAPTATIVO" },
+  predictability: { label: "Predictibilidad", tag: "PREDECIBLE" },
+  structure: { label: "Estructura", tag: "ESTRUCTURADO" },
+  collaboration: { label: "Colaboración", tag: "MUCHA COLABORACIÓN" },
+  control: { label: "Control", tag: "ORIENTADO AL CONTROL" },
+  experimentation: { label: "Experimentación", tag: "EXPLORATORIO" }
+};
+
+const ES_APPROACHES = {
+  predictive: {
+    name: "Predictivo",
+    tagline: "Planificar primero, después ejecutar contra el plan.",
+    what: "Tu proyecto se puede definir desde el inicio, así que el valor está en planificarlo bien y proteger el plan.",
+    role: "Un enfoque predictivo significa que el plan va primero y los cambios pasan por una decisión, no por un encogimiento de hombros.",
+    whenNot: "Esto deja de funcionar en cuanto los requisitos resultan menos firmes de lo que parecían."
+  },
+  adaptive: {
+    name: "Adaptativo",
+    tagline: "Decidir mientras aprendes, en ciclos cortos.",
+    what: "Hay demasiado abierto para planificarlo todo de entrada, así que el valor está en los ciclos cortos y la retroalimentación frecuente.",
+    role: "Un enfoque adaptativo significa que el plan se reconstruye con regularidad a partir de lo que acabas de aprender.",
+    whenNot: "Se vuelve incómodo cuando alguien necesita alcance, fecha y precio cerrados por adelantado."
+  },
+  hybrid: {
+    name: "Híbrido",
+    tagline: "Planificar el marco, adaptar el contenido.",
+    what: "Partes de tu proyecto necesitan planificación firme y otras seguirán moviéndose, así que necesitas ambas cosas a la vez.",
+    role: "Un enfoque híbrido significa planificar los límites con firmeza y dejar espacio para adaptarse dentro de ellos.",
+    whenNot: "Se convierte en lo peor de los dos mundos si nadie dice con claridad qué partes están cerradas y cuáles están abiertas."
+  }
+};
+
+const ES_METHODS = {
+  agile: {
+    tagline: "Entregar, aprender, ajustar. Y otra vez.",
+    role: "Agile pone los principios: entregar en piezas pequeñas, recibir retroalimentación y cambiar de rumbo sin descarrilar el proyecto.",
+    whenNot: ["El alcance, el precio y las fechas están fijados por contrato y cada cambio requiere una adenda formal."],
+    start: [
+      ["Arma una sola lista priorizada", "Junta todo en un backlog único y ordénalo por valor."],
+      ["Entrega en incrementos cortos", "Busca mostrar algo utilizable cada una a cuatro semanas."],
+      ["Agenda momentos de retroalimentación", "Después de cada incremento, revísalo con los interesados y ajusta."]
+    ],
+    learn: {
+      what: "Un conjunto de valores y principios para trabajar de forma iterativa y colaborativa. No es un proceso: Scrum, Kanban y XP son formas de llevarlo a la práctica.",
+      bestFor: "Proyectos donde los requisitos evolucionan y la retroalimentación importa.",
+      watchOut: "Sin algo de estructura, “ser ágil” termina siendo no tener plan.",
+      example: ["Construir una pieza", "Recibir feedback", "Ajustar", "Construir la siguiente"],
+      exampleNote: "Lanzar una primera versión y mejorarla cada dos semanas."
+    }
+  },
+  lean: {
+    tagline: "Más valor. Menos desperdicio.",
+    role: "Lean pone la mirada: conservar lo que aporta valor al cliente y recortar las esperas, los reprocesos y los pasos de más.",
+    whenNot: ["El problema es la incertidumbre sobre qué construir, no la ineficiencia de cómo lo construyes."],
+    start: [
+      ["Mapea cómo fluye el valor", "Dibuja cada paso desde la solicitud hasta la entrega y anota cuánto tarda."],
+      ["Detecta el desperdicio", "Marca esperas, traspasos, reprocesos y pasos que nadie pagaría."],
+      ["Arregla un cuello de botella a la vez", "Simplifica el peor paso, mide el resultado y repite."]
+    ],
+    learn: {
+      what: "Una filosofía centrada en entregar valor al cliente eliminando el desperdicio del proceso.",
+      bestFor: "Trabajo que se siente lento, costoso o burocrático.",
+      watchOut: "Recortar “desperdicio” con demasiada prisa puede eliminar resguardos útiles.",
+      example: ["Solicitud", "3 días de espera", "Trabajo", "Entrega"],
+      exampleNote: "Quitar la espera de aprobación significa entregar tres días antes."
+    }
+  },
+  sixsigma: {
+    tagline: "Menos defectos. Decisiones con datos.",
+    role: "Six Sigma pone la disciplina: medir los errores, encontrar su causa raíz y reducir la variación en lugar de suponer.",
+    whenNot: ["Todavía no hay un proceso que medir, o no hay datos confiables con los que trabajar."],
+    start: [
+      ["Define y mide un defecto", "Elige un error recurrente y cuenta con qué frecuencia ocurre."],
+      ["Encuentra la causa raíz", "Usa tus datos, un diagrama de Ishikawa o los “5 porqués”."],
+      ["Mejora y controla", "Prueba una solución y agrega controles para que la mejora se sostenga."]
+    ],
+    learn: {
+      what: "Un enfoque basado en datos para reducir defectos y variación, normalmente con el ciclo DMAIC.",
+      bestFor: "Procesos existentes con errores medibles y recurrentes.",
+      watchOut: "Es excesivo para proyectos pequeños y necesita datos confiables.",
+      example: ["Definir: errores de factura", "Medir: 8%", "Analizar", "Mejorar", "Controlar"],
+      exampleNote: "Reducir errores de facturación encontrando dónde se originan."
+    }
+  },
+  scrum: {
+    tagline: "Ciclos cortos. Metas claras. Mejora constante.",
+    role: "Scrum te da estructura con ciclos de trabajo fijos, una meta clara por ciclo y una revisión al final de cada uno.",
+    alsoIf: "Encaja si tu equipo puede proteger un ritmo de planificación con pocas interrupciones.",
+    whenNot: [
+      "Las solicitudes urgentes interrumpen al equipo todo el tiempo y los sprints se rompen.",
+      "El equipo no puede comprometerse con un ciclo porque le jalan gente para otros proyectos."
+    ],
+    start: [
+      ["Define dos roles clave", "Alguien decide qué se construye; alguien protege cómo trabaja el equipo."],
+      ["Corre un ciclo de dos semanas", "Planea al inicio, ten una reunión diaria breve y revisa al final."],
+      ["Haz una retrospectiva", "Después de cada ciclo, elige una cosa que mejorar en el siguiente."]
+    ],
+    learn: {
+      what: "Un framework que entrega el trabajo en ciclos de duración fija, con roles y eventos definidos.",
+      bestFor: "Construir algo paso a paso con un equipo dedicado.",
+      watchOut: "Las interrupciones constantes rompen los ciclos. Necesita un equipo estable.",
+      example: ["Ciclo 1: Inicio", "Ciclo 2: Reservas", "Ciclo 3: Pagos"],
+      exampleNote: "Un sitio de reservas construido y revisado un ciclo a la vez."
+    }
+  },
+  scrumban: {
+    tagline: "Estructura cuando la necesitas. Flexibilidad cuando todo cambia.",
+    role: "Scrumban te da un ritmo de planificación sin fingir que el plan sobrevivirá: el trabajo se jala de forma continua, con revisiones regulares.",
+    alsoIf: "Encaja si el trabajo planeado y las solicitudes inesperadas chocan todo el tiempo.",
+    whenNot: [
+      "Nada interrumpe tu plan, en cuyo caso los ciclos simples bastan.",
+      "Nadie hace respetar los límites de trabajo en curso y todo termina abierto a la vez."
+    ],
+    start: [
+      ["Crea un flujo visual", "Backlog → Listo → Haciendo → Revisión → Hecho."],
+      ["Pon límites de trabajo en curso", "Limita cuántos elementos puede tener cada columna o cada persona."],
+      ["Planea con ritmo, jala continuo", "Mantén las sesiones de planeación y revisión, pero deja que el equipo jale según su capacidad."]
+    ],
+    learn: {
+      what: "Un híbrido de Scrum y Kanban: ritmo de planificación más flujo continuo.",
+      bestFor: "Equipos que hacen trabajo nuevo y soporte al mismo tiempo.",
+      watchOut: "Se convierte en “sin reglas” cuando se saltan las sesiones de planeación.",
+      example: ["Planeación semanal", "Jalar de Listo", "Carril rápido para urgencias", "Revisión"],
+      exampleNote: "Entregar funcionalidades mientras arreglas lo que reportan los usuarios."
+    }
+  },
+  xp: {
+    name: "Programación Extrema (XP)", short: "XP",
+    tagline: "Cambiar el software sin romperlo, con disciplina de ingeniería.",
+    role: "XP suma las prácticas de ingeniería que permiten cambiar el código seguido sin romper nada: pruebas primero, entregas pequeñas, integración continua.",
+    alsoIf: "Encaja si la calidad técnica es lo que limita qué tan rápido puedes avanzar.",
+    whenNot: [
+      "El trabajo no es software, así que casi ninguna práctica aplica.",
+      "El equipo de desarrollo no está convencido del pair programming ni de escribir pruebas primero."
+    ],
+    start: [
+      ["Escribe pruebas antes del código", "Empieza por pruebas automatizadas de tus funciones más críticas."],
+      ["Integra todos los días", "Une y prueba el código al menos a diario para detectar problemas temprano."],
+      ["Prueba el pair programming", "Trabajen en pareja en las tareas más riesgosas y roten las parejas."]
+    ],
+    learn: {
+      what: "Un framework de software basado en prácticas de ingeniería: desarrollo guiado por pruebas, programación en pareja, integración continua y entregas pequeñas.",
+      bestFor: "Equipos de software donde importan tanto la calidad como el cambio.",
+      watchOut: "Necesita convicción del equipo técnico, y trabajar en pareja se siente lento al inicio.",
+      example: ["Escribir prueba", "Escribir código", "Refactorizar", "Entregar pequeño"],
+      exampleNote: "Agregar un checkout con pruebas que protejan el flujo de pago."
+    }
+  },
+  apf: {
+    name: "Marco Adaptativo de Proyectos (APF)", short: "APF",
+    tagline: "Conoce el destino. Descubre la ruta.",
+    role: "APF mantiene la meta fija y el alcance abierto: después de cada ciclo decides con los interesados qué conservar, qué soltar y qué probar.",
+    alsoIf: "Encaja si la meta está acordada pero la solución sigue siendo una pregunta abierta.",
+    whenNot: [
+      "Necesitas comprometer alcance y precio cerrados desde el inicio.",
+      "Los interesados no pueden estar disponibles para redefinir el alcance después de cada ciclo."
+    ],
+    start: [
+      ["Define la meta, no la solución", "Escribe cómo se ve el éxito y deja abierto el “cómo”."],
+      ["Planea un ciclo corto a la vez", "Elige lo que más probablemente te acerque a la meta."],
+      ["Redefine el alcance con los interesados", "Después de cada ciclo, decidan juntos qué sigue."]
+    ],
+    learn: {
+      what: "Un framework que trata el alcance como flexible y lo vuelve a decidir después de cada ciclo según lo aprendido.",
+      bestFor: "Una meta clara con una solución incierta.",
+      watchOut: "Necesita interesados involucrados y tolerancia a un alcance abierto.",
+      example: ["Meta: +20% de reservas", "Ciclo 1: nuevo formulario", "Revisar resultados", "Ciclo 2: ajustar"],
+      exampleNote: "Mejorar conversiones sin saber todavía qué cambio funciona."
+    }
+  },
+  prince2: {
+    tagline: "Etapas controladas. Roles claros. Decisiones justificadas.",
+    role: "PRINCE2 te da gobernanza: roles definidos, etapas controladas y un caso de negocio que debe seguir siendo válido para continuar.",
+    alsoIf: "Encaja si las aprobaciones y las responsabilidades tienen que ser explícitas.",
+    whenNot: [
+      "El equipo es pequeño y el trámite costaría más de lo que protege.",
+      "El trabajo cambia cada semana y los planes de etapa quedan viejos antes de aprobarse."
+    ],
+    start: [
+      ["Construye el caso de negocio", "Explica por qué vale la pena el proyecto y mantenlo actualizado."],
+      ["Arma un comité de proyecto", "Deja claro quién decide, quién gestiona y quién entrega."],
+      ["Planea por etapas con aprobaciones", "Revisa el avance y el caso de negocio antes de cada etapa nueva."]
+    ],
+    learn: {
+      what: "Un método basado en procesos, con roles definidos, etapas controladas y justificación de negocio permanente. Se guía por siete principios.",
+      bestFor: "Organizaciones grandes, sector público y contratos que exigen gobernanza formal.",
+      watchOut: "Se siente burocrático para equipos pequeños y rápidos.",
+      example: ["Puesta en marcha", "Inicio", "Etapa 1", "Revisión de etapa", "Etapa 2", "Cierre"],
+      exampleNote: "Un portal público donde cada etapa necesita aprobación del comité."
+    }
+  },
+  per: {
+    name: "Reingeniería Habilitada por Paquetes (PER)", short: "PER",
+    tagline: "Rediseña el proceso. Que el sistema lo impulse.",
+    role: "PER toma el sistema nuevo como la oportunidad para rediseñar cómo se trabaja, en vez de automatizar las viejas costumbres.",
+    alsoIf: "Encaja si el software nuevo debería cambiar cómo opera la organización.",
+    whenNot: [
+      "Estás construyendo software, no adoptándolo.",
+      "Nadie tiene la autoridad para cambiar los procesos que toca el sistema."
+    ],
+    start: [
+      ["Mapea el proceso actual", "Documenta cómo fluye el trabajo hoy y dónde se rompe."],
+      ["Diseña alrededor de la herramienta", "Parte de la forma estándar del sistema antes de personalizar."],
+      ["Planea para las personas", "Capacita, actualiza roles y haz el cambio por fases."]
+    ],
+    learn: {
+      what: "Un enfoque que rediseña procesos de negocio alrededor de un sistema empaquetado, como un ERP, un CRM o una plataforma de RH.",
+      bestFor: "Implementaciones de sistemas que buscan transformar la operación.",
+      watchOut: "Personalizar mucho para copiar el proceso viejo anula el propósito.",
+      example: ["Solicitudes en papel", "Adoptar la plataforma", "Rediseñar aprobaciones", "Salida a producción"],
+      exampleNote: "Reemplazar hojas de cálculo y correos con un solo sistema."
+    }
+  },
+  rad: {
+    name: "Desarrollo Rápido de Aplicaciones (RAD)", short: "RAD",
+    tagline: "Prototipa rápido. Aprende más rápido.",
+    role: "RAD cambia las especificaciones largas por prototipos: descubres qué necesita la gente poniéndole algo enfrente.",
+    alsoIf: "Encaja si aprenderías más de un prototipo que de otra ronda de planeación.",
+    whenNot: [
+      "El sistema es grande, regulado o tiene muchas integraciones.",
+      "Los usuarios no están disponibles para reaccionar rápido a los prototipos."
+    ],
+    start: [
+      ["Haz un prototipo rápido", "Un mockup clicable o una versión no-code, no un producto terminado."],
+      ["Pruébalo con usuarios reales", "Observa a tres o cinco personas usarlo y anota dónde se traban."],
+      ["Itera y después construye", "Refina en rondas rápidas antes de invertir en la versión final."]
+    ],
+    learn: {
+      what: "Un enfoque de software que privilegia el prototipado rápido y la retroalimentación del usuario por encima de la planeación previa.",
+      bestFor: "Validar rápido qué necesitan realmente los usuarios.",
+      watchOut: "Encaja mal en sistemas grandes, complejos o muy regulados.",
+      example: ["Prototipo", "Feedback", "Nuevo prototipo", "Construir"],
+      exampleNote: "Probar tres flujos de reserva antes de programar el definitivo."
+    }
+  },
+  kanban: {
+    tagline: "Ver el trabajo. Limitar el caos.",
+    role: "Kanban puede ayudarte a ver todo el flujo en un tablero y limitar cuánto se hace al mismo tiempo.",
+    start: [
+      ["Mapea tu flujo real", "Por hacer → En curso → Revisión → Hecho, con tus pasos reales."],
+      ["Pon límites de trabajo en curso", "Limita cada columna, por ejemplo tres elementos “En curso”."],
+      ["Revisa el flujo cada semana", "Encuentra qué se atora y arregla el cuello de botella, no a las personas."]
+    ],
+    learn: {
+      what: "Un método visual para gestionar trabajo continuo limitando el trabajo en curso.",
+      bestFor: "Trabajo que entra sin parar: tickets, solicitudes, contenido, soporte.",
+      watchOut: "Sin límites es solo una lista de pendientes, y la planeación a largo plazo necesita cuidado extra.",
+      example: ["Solicitud", "Listo", "En curso", "Revisión", "Hecho"],
+      exampleNote: "Un equipo atendiendo reportes de errores conforme llegan."
+    }
+  },
+  cpm: {
+    name: "Método de la Ruta Crítica (CPM)", short: "Ruta Crítica",
+    tagline: "Encuentra las tareas que deciden tu fecha.",
+    role: "La Ruta Crítica puede mostrarte qué cadena de tareas define realmente tu fecha final, para proteger esas y no todas.",
+    start: [
+      ["Lista tareas y duraciones", "Desglosa el trabajo y estima cada pieza."],
+      ["Mapea las dependencias", "Marca qué debe terminar antes de que algo más empiece."],
+      ["Cuida la ruta crítica", "Sigue de cerca la cadena más larga: un retraso ahí retrasa todo."]
+    ],
+    learn: {
+      what: "Una técnica de planificación que identifica la secuencia de tareas dependientes que define la duración mínima del proyecto.",
+      bestFor: "Trabajo con fecha firme y muchas dependencias.",
+      watchOut: "Depende de buenas estimaciones e ignora si las personas están saturadas.",
+      example: ["Contenido", "Diseño", "Desarrollo", "Pruebas", "Lanzamiento"],
+      exampleNote: "Si diseño se atrasa tres días, el lanzamiento se atrasa tres días."
+    }
+  },
+  ccpm: {
+    name: "Gestión por Cadena Crítica (CCPM)", short: "Cadena Crítica",
+    tagline: "Protege a tu gente, no solo a tus tareas.",
+    role: "La Cadena Crítica ayuda cuando las personas son el cuello de botella: reduce la multitarea y junta los colchones de tiempo en un buffer compartido.",
+    start: [
+      ["Encuentra tu recurso cuello de botella", "Identifica a quién termina esperando todo el mundo."],
+      ["Corta la multitarea", "Deja que las personas clave terminen una tarea antes de empezar otra."],
+      ["Junta el tiempo de seguridad", "Quita el colchón de cada tarea y ponlo en un solo buffer al final."]
+    ],
+    learn: {
+      what: "Un método de programación construido alrededor de la disponibilidad de recursos, con buffers compartidos en lugar de estimaciones infladas.",
+      bestFor: "Personas compartidas o limitadas con fechas firmes.",
+      watchOut: "Los líderes tienen que aceptar los buffers y frenar el cambio constante de tarea.",
+      example: ["Un diseñador, 3 proyectos", "Secuenciar el trabajo", "Agregar buffer", "Vigilar el buffer"],
+      exampleNote: "Una agencia donde un mismo especialista atiende a todos los clientes."
+    }
+  },
+  outcome: {
+    name: "Mapeo de Alcances", short: "Mapeo de Alcances",
+    tagline: "Medir el cambio en las personas, no solo los entregables.",
+    role: "El Mapeo de Alcances te mantiene honesta sobre la adopción: registra cambios en lo que la gente realmente hace, no solo en lo que entregaste.",
+    start: [
+      ["Identifica a tus socios clave", "Lista a las personas o grupos cuyo comportamiento debe cambiar."],
+      ["Define señales de avance", "Describe qué esperarías ver, qué te gustaría ver y qué te encantaría ver."],
+      ["Observa y registra", "Sigue los cambios que ves y ajusta tu estrategia."]
+    ],
+    learn: {
+      what: "Un enfoque de planificación y seguimiento, creado por el IDRC, que define el éxito como cambios en comportamientos y relaciones.",
+      bestFor: "Adopción, capacitación, programas de cambio e impacto social.",
+      watchOut: "Sirve menos cuando la meta es un entregable técnico concreto.",
+      example: ["Meta: uso semanal", "Capacitación", "Acompañamiento", "Observar adopción"],
+      exampleNote: "Una implementación medida por hábitos, no por asistencia."
+    }
+  },
+  waterfall: {
+    name: "Cascada (Waterfall)", short: "Cascada",
+    tagline: "Planear una vez. Construir paso a paso.",
+    role: "Cascada es la forma de ciclo de vida que encaja aquí: terminar cada fase antes de abrir la siguiente.",
+    whenNot: [
+      "Los requisitos resultan menos firmes de lo que parecían.",
+      "Los problemas solo aparecerían en la fase de pruebas, cuando corregirlos sale caro."
+    ],
+    start: [
+      ["Cierra el alcance por escrito", "Documenta requisitos y consigue la aprobación antes de empezar."],
+      ["Divide el proyecto en fases", "Requisitos → Análisis → Diseño → Construcción → Pruebas → Despliegue."],
+      ["Acuerda una regla de cambios", "Define desde ahora cómo se revisan, aprueban y cotizan los cambios tardíos."]
+    ],
+    learn: {
+      what: "Un modelo de ciclo de vida secuencial donde cada fase se termina antes de que empiece la siguiente.",
+      bestFor: "Requisitos fijos con poco cambio esperado.",
+      watchOut: "Los cambios tardíos son caros y los problemas aparecen tarde.",
+      example: ["Requisitos", "Análisis", "Diseño", "Construcción", "Pruebas", "Despliegue"],
+      exampleNote: "Una construcción definida, con alcance y diseño aprobados."
+    }
+  },
+  npi: {
+    name: "Introducción de Nuevo Producto (NPI)", short: "NPI",
+    tagline: "De la idea al mercado, una compuerta a la vez.",
+    role: "NPI es el proceso alrededor del lanzamiento: concepto, validación, producción y salida al mercado, con una decisión de seguir o parar en cada compuerta.",
+    whenNot: [
+      "Estás mejorando un producto existente en lugar de introducir uno nuevo.",
+      "Las compuertas se vuelven papeleo en lugar de decisiones reales."
+    ],
+    start: [
+      ["Escribe un brief de una página", "El problema, el cliente objetivo y el caso de negocio."],
+      ["Define las compuertas", "Concepto → Validación → Desarrollo → Producción → Lanzamiento."],
+      ["Planea el lanzamiento desde temprano", "Involucra a marketing, ventas y operaciones desde el inicio."]
+    ],
+    learn: {
+      what: "Un proceso estructurado para llevar un producto nuevo del concepto al lanzamiento comercial, por fases o compuertas.",
+      bestFor: "Lanzamientos de producto, físicos o digitales.",
+      watchOut: "Se vuelve lento cuando las compuertas se convierten en burocracia.",
+      example: ["Concepto", "Prototipo", "Validar", "Producir", "Lanzar"],
+      exampleNote: "Una marca lanzando su primera línea de producto."
+    }
+  },
+  pmbok: {
+    tagline: "Un estante de referencia, no una receta.",
+    role: "El PMBOK conviene tenerlo como referencia para la parte formal: riesgos, presupuesto, alcance, cronograma, interesados y comunicación.",
+    start: [
+      ["Escribe un acta de proyecto", "Objetivos, alcance, presupuesto, interesados clave y criterios de éxito."],
+      ["Crea registros de riesgos e interesados", "Los riesgos principales con responsable, y quién necesita qué información."],
+      ["Arma un plan de comunicación", "Acuerden reportes, reuniones y rutas de decisión desde el primer día."]
+    ],
+    learn: {
+      what: "Un cuerpo de conocimiento del PMI con buenas prácticas estándar. Es una referencia de la que tomas partes, no un método paso a paso, y es la base de la certificación PMP.",
+      bestFor: "Sumar gestión formal de riesgo, costo, alcance e interesados a lo que ya estés haciendo.",
+      watchOut: "Aplicar todos sus procesos a un proyecto pequeño es puro sobrecosto.",
+      example: ["Acta", "Registro de riesgos", "Plan de interesados", "Reporte de avance"],
+      exampleNote: "Tomar prestadas solo las partes que tu proyecto realmente necesita."
+    }
+  }
+};
+
+const ES_QUESTIONS = {
+  type: {
+    title: "¿Qué tipo de proyecto es?",
+    help: "Elige el más cercano. Es una variable más, no la respuesta completa.",
+    options: {
+      software: { label: "Desarrollo de software o una app", because: "Estás construyendo software" },
+      techimpl: { label: "Implementar un sistema o herramienta nueva", because: "Estás implementando un sistema nuevo en una organización" },
+      process: { label: "Mejorar un proceso u operación", because: "Estás mejorando cómo trabaja la organización" },
+      launch: { label: "Lanzar un producto nuevo", because: "Estás llevando un producto nuevo al mercado" },
+      marketing: { label: "Marketing o campañas", because: "Estás llevando trabajo de marketing o campañas" },
+      ops: { label: "Operación o soporte continuo", because: "Estás llevando una operación o soporte continuo" },
+      construction: { label: "Construcción u obra física", because: "Estás gestionando una obra física" },
+      consulting: { label: "Consultoría o proyecto de cliente", because: "Estás entregando un proyecto para un cliente" },
+      internal: { label: "Un proyecto interno de la empresa", because: "Es un proyecto interno" },
+      research: { label: "Investigación, innovación o I+D", because: "Estás en un proyecto de investigación e innovación" }
+    }
+  },
+  clarity: {
+    title: "¿Qué tan claro está lo que hay que entregar?",
+    options: {
+      defined: { label: "Muy claro", sub: "Los requisitos están definidos y acordados desde el inicio", because: "Tus requisitos están definidos desde el inicio" },
+      mostly: { label: "Casi todo claro", sub: "Algunos detalles habrá que ajustarlos", because: "Casi todo lo que hay que entregar ya está claro" },
+      evolving: { label: "Va a evolucionar", sub: "Sabemos la dirección, los detalles se irán definiendo", because: "Los detalles se irán definiendo conforme avance el proyecto" },
+      discovering: { label: "Todavía lo estamos descubriendo", sub: "Seguimos averiguando qué necesita el proyecto", because: "Todavía estás descubriendo qué necesita realmente el proyecto" }
+    }
+  },
+  change: {
+    title: "¿Qué tan probable es que los requisitos cambien después de empezar?",
+    options: {
+      rare: { label: "Muy poco probable", sub: "Un cambio sería la excepción", because: "Los cambios después del arranque serían la excepción" },
+      some: { label: "Algunos ajustes", sub: "Lo central se mantiene, los detalles se mueven", because: "Esperas ajustes, pero lo central debería sostenerse" },
+      likely: { label: "Es probable que evolucionen", sub: "Esperamos cambiar de dirección en el camino", because: "Esperas que las prioridades se muevan en el camino" },
+      constant: { label: "Constantemente", sub: "Las prioridades cambian casi cada semana", because: "Tus prioridades cambian casi cada semana" }
+    }
+  },
+  solution: {
+    title: "¿Qué tanto sabes cómo llegar ahí?",
+    help: "No la meta, sino el camino para alcanzarla.",
+    options: {
+      known: { label: "Ya lo hemos hecho antes", sub: "El camino es conocido y repetible", because: "Ya has hecho trabajo como este antes" },
+      mostly: { label: "Casi todo conocido", sub: "Habrá algunas partes por resolver", because: "El camino es casi conocido, con algunas partes abiertas" },
+      goal: { label: "La meta es clara, la solución no", sub: "Iremos encontrando el cómo", because: "Conoces la meta pero todavía no la solución" },
+      hypothesis: { label: "Estamos probando una idea", sub: "No sabemos si va a funcionar", because: "Todavía estás probando si la idea funciona" }
+    }
+  },
+  stakeholders: {
+    title: "¿Qué tan involucrados están los clientes o interesados?",
+    options: {
+      handsoff: { label: "Poco", sub: "Acuerdan el alcance y revisan al final", because: "Los interesados aparecen sobre todo al inicio y al final" },
+      checkpoints: { label: "En puntos de control", sub: "Revisiones en hitos acordados", because: "Los interesados revisan el trabajo en puntos de control acordados" },
+      regular: { label: "Con regularidad", sub: "Ven avances y dan retroalimentación seguido", because: "Los interesados ven avances y dan retroalimentación seguido" },
+      continuous: { label: "Codo a codo", sub: "Son parte de las decisiones del día a día", because: "Los interesados son parte de tus decisiones diarias" },
+      many: { label: "Muchas voces", sub: "Prioridades que compiten y aprobaciones formales", because: "Varios interesados con prioridades distintas tienen que aprobar" }
+    }
+  },
+  delivery: {
+    title: "¿Cómo llegarían los resultados a quienes los usan?",
+    options: {
+      final: { label: "Una entrega completa al final", because: "Los resultados llegan en una sola entrega final" },
+      milestones: { label: "En hitos grandes con aprobaciones", because: "Entregas en hitos grandes con aprobaciones" },
+      increments: { label: "En piezas utilizables cada pocas semanas", because: "Quieres entregar piezas utilizables cada pocas semanas" },
+      continuous: { label: "De forma continua, conforme se termina cada cosa", because: "Quieres entregar de forma continua conforme se termina cada cosa" },
+      prototypes: { label: "Como prototipos a los que la gente pueda reaccionar", because: "Quieres poner prototipos frente a la gente desde temprano" }
+    }
+  },
+  arrival: {
+    title: "¿Cómo suele aparecer el trabajo nuevo?",
+    options: {
+      upfront: { label: "Ya se conoce todo desde el inicio", because: "Todo el trabajo se conoce desde el inicio" },
+      cycles: { label: "Lo planeamos por ciclos", because: "Planeas el trabajo en ciclos regulares" },
+      stream: { label: "Un flujo constante de solicitudes", because: "El trabajo llega como un flujo constante de solicitudes" },
+      interrupted: { label: "Planeamos, y luego entran urgencias", because: "Las urgencias interrumpen con frecuencia lo que planeaste" },
+      unfolds: { label: "Se va aclarando conforme aprendemos", because: "El trabajo se aclara solo conforme aprendes" }
+    }
+  },
+  team: {
+    title: "¿Quién hace el trabajo?",
+    options: {
+      solo: { label: "Yo, o dos o tres personas", because: "Trabajas con dos o tres personas como máximo" },
+      onecrew: { label: "Un equipo dedicado a este proyecto", because: "Un equipo está dedicado a este proyecto" },
+      shared: { label: "Un equipo repartido entre varios proyectos", because: "Tu equipo está repartido entre varios proyectos" },
+      crossfn: { label: "Varias áreas trabajando juntas", because: "Varias áreas tienen que trabajar juntas" },
+      large: { label: "Un grupo grande con proveedores o departamentos", because: "Participa un grupo grande con proveedores o departamentos" }
+    }
+  },
+  autonomy: {
+    title: "¿Quién decide cómo se organiza el trabajo?",
+    options: {
+      team: { label: "El equipo decide por sí mismo", because: "Tu equipo organiza su propio trabajo" },
+      within: { label: "El equipo decide dentro de límites acordados", because: "Tu equipo decide dentro de límites acordados" },
+      manager: { label: "Una jefatura planea y el equipo ejecuta", because: "Una jefatura planea el trabajo y el equipo lo ejecuta" },
+      external: { label: "Los planes se aprueban fuera del equipo", because: "Los planes necesitan aprobación fuera del equipo" }
+    }
+  },
+  dependencies: {
+    title: "¿Qué tanto dependen las tareas entre sí?",
+    options: {
+      independent: { label: "Casi nada", sub: "Casi todo puede avanzar por su cuenta", because: "Casi todas tus tareas pueden avanzar por su cuenta" },
+      some: { label: "Algo", sub: "Algunas cosas tienen que ir en orden", because: "Algunas cosas tienen que ocurrir en cierto orden" },
+      chained: { label: "Mucho", sub: "Un retraso arrastra todo lo demás", because: "Un retraso arrastraría todo lo demás" },
+      people: { label: "La gente es la restricción", sub: "Importa quién está disponible, más que el orden", because: "Importa más quién está disponible que el orden de las tareas" }
+    }
+  },
+  deadline: {
+    title: "¿Qué tan fija es la fecha?",
+    options: {
+      hard: { label: "La fecha no se mueve", sub: "Depende un evento, un contrato o una temporada", because: "Tu fecha no se mueve" },
+      target: { label: "Hay una fecha objetivo con algo de margen", because: "Tienes una fecha objetivo con algo de margen" },
+      flexible: { label: "El tiempo es flexible", sub: "Importa más que quede bien", because: "Importa más que quede bien que cumplir una fecha" },
+      asap: { label: "Lo más rápido posible", sub: "La velocidad es el punto", because: "La velocidad es el punto en este proyecto" }
+    }
+  },
+  constraint: {
+    title: "¿Qué es lo más apretado en este proyecto?",
+    options: {
+      time: { label: "El calendario", because: "El calendario es tu restricción más apretada" },
+      money: { label: "El presupuesto", because: "El presupuesto es tu restricción más apretada" },
+      people: { label: "Las personas disponibles", because: "Las personas disponibles son tu restricción más apretada" },
+      quality: { label: "El nivel de calidad", sub: "Un error saldría caro o sería muy visible", because: "Un error saldría caro, así que el nivel de calidad está apretado" },
+      scope: { label: "El alcance", sub: "Hay más por hacer que capacidad", because: "Hay más alcance que capacidad para entregarlo" }
+    }
+  },
+  governance: {
+    title: "¿Cuánta documentación y aprobación necesita esto?",
+    options: {
+      light: { label: "Casi nada", sub: "Solo hay que sacarlo adelante", because: "Casi no necesitas documentación formal" },
+      some: { label: "Algo de reporte", sub: "Avances y registros básicos", because: "Necesitas reportes ligeros y registros básicos" },
+      formal: { label: "Formal", sub: "Decisiones documentadas, aprobaciones, rastro escrito", because: "Las decisiones y aprobaciones tienen que quedar documentadas" },
+      regulated: { label: "Regulado", sub: "Auditorías, cumplimiento u obligaciones contractuales", because: "Trabajas bajo auditorías u obligaciones contractuales" }
+    }
+  },
+  worry: {
+    title: "Si algo sale mal, ¿qué dolería más?",
+    options: {
+      late: { label: "No llegar a la fecha", because: "No llegar a la fecha es lo que más dolería" },
+      defects: { label: "Que los errores lleguen al cliente", because: "Que los errores lleguen al cliente es lo que más dolería" },
+      wrong: { label: "Construir lo que no era", because: "Construir lo que no era es lo que más dolería" },
+      technical: { label: "Problemas técnicos o integraciones", because: "Los problemas técnicos y las integraciones son lo que más dolería" },
+      cost: { label: "Pasarse del presupuesto", because: "Pasarse del presupuesto es lo que más dolería" },
+      adoption: { label: "Que nadie lo use", because: "Que nadie adopte el resultado es lo que más dolería" },
+      chaos: { label: "Perder el control de todo lo abierto", because: "Perder el control de todo lo que está abierto es lo que más dolería" },
+      compliance: { label: "Fallar una auditoría o una cláusula", because: "Fallar una auditoría o una cláusula es lo que más dolería" }
+    }
+  },
+  success: {
+    title: "¿Cómo sabrás que el proyecto tuvo éxito?",
+    options: {
+      onplan: { label: "Se cumplió alcance, tiempo y presupuesto", because: "El éxito es cumplir alcance, tiempo y presupuesto" },
+      works: { label: "La cosa funciona y la gente la usa", because: "El éxito es que el resultado funcione y se use" },
+      metric: { label: "Un número mejora de forma medible", because: "El éxito es un número que tiene que mejorar de forma medible" },
+      behaviour: { label: "La gente cambia su forma de trabajar", because: "El éxito es que la gente cambie su forma de trabajar" },
+      learn: { label: "Aprendemos si la idea vale la pena", because: "El éxito es aprender si la idea vale la pena" }
+    }
+  }
+};
+
+/* Paraphrases of what the Teamwork guide says, in Spanish.
+   The source page is in English; these are translations of the summaries. */
+const ES_REF_NOTES = {
+  agile: "La guía presenta Agile como una reacción a los métodos lineales: colaborativo, rápido y abierto al cambio basado en datos, con el trabajo tomado de un backlog priorizado.",
+  lean: "La guía sitúa el origen de Lean en el Sistema de Producción Toyota y sus tres desperdicios: muda (desperdicio), mura (desnivel) y muri (sobrecarga).",
+  sixsigma: "La guía describe el ciclo DMAIC (definir, medir, analizar, mejorar, controlar) y señala que Six Sigma se aplica junto a otros métodos, no en lugar de ellos.",
+  scrum: "La guía dice que Scrum es una forma de Agile y más un framework que una metodología: sprints de una a dos semanas, un Scrum Master y una retrospectiva antes del siguiente sprint.",
+  scrumban: "La guía llama a Scrumban un híbrido: jalar del backlog según la capacidad como en Kanban, conservando la planeación, las revisiones y las retrospectivas de Scrum.",
+  xp: "La guía destaca los cinco valores de XP (simplicidad, comunicación, retroalimentación, respeto y coraje) y señala que encaja con un equipo pequeño y en un mismo lugar.",
+  apf: "La guía construye APF alrededor de lo inevitable del cambio: anticipar riesgos, reevaluar resultados constantemente y tener claras tus condiciones de satisfacción.",
+  prince2: "La guía describe PRINCE2 como metodología y certificación a la vez, guiada por siete principios y siete procesos, y advierte sobre adaptarla tanto que quede en PRINCE solo de nombre.",
+  per: "La guía describe PER como rediseñar productos o procesos con ojos nuevos, transformando el negocio mediante el rediseño de procesos o la realineación de las personas.",
+  rad: "La guía describe RAD como entregas rápidas de prototipos e iteraciones que valoran la retroalimentación del usuario por encima de la planeación estricta, y advierte que conviene a equipos pequeños con experiencia.",
+  kanban: "La guía describe un tablero donde el trabajo se jala de forma continua según la capacidad del equipo, con límites de trabajo en curso para mantener el foco y hacer visibles los cuellos de botella.",
+  cpm: "Los pasos de la guía: listar las tareas esenciales, estimar duraciones y dependencias, y programar la secuencia más larga, que define el plazo del proyecto.",
+  ccpm: "La guía presenta CCPM como la ruta crítica hecha realista, con buffers que absorben retrasos y problemas de recursos sin descarrilar todo el proyecto.",
+  outcome: "La guía señala que el Mapeo de Alcances nació en el IDRC y mide la influencia y el cambio de comportamiento duradero en lugar de los entregables.",
+  waterfall: "La guía lista la secuencia clásica (requisitos, análisis, diseño, construcción, pruebas, despliegue y mantenimiento) y advierte que no se puede volver a una fase ya terminada.",
+  npi: "La secuencia de compuertas de la guía: definir la especificación, evaluar la factibilidad, prototipar, validar, fabricar y evaluar el éxito del producto tras el lanzamiento.",
+  pmbok: "La guía es explícita en que el PMBOK no es una metodología en sí: es una guía de buenas prácticas y la base de la certificación PMP."
+};
+
+/* ---------- accessors ---------- */
+
+function refNote(key) {
+  const ref = METHODS[key].ref;
+  if (!ref) return "";
+  return (LANG === "es" && ES_REF_NOTES[key]) ? ES_REF_NOTES[key] : (ref.note || "");
+}
+
+function qT(q) {
+  if (LANG !== "es") return q;
+  const e = ES_QUESTIONS[q.id] || {};
+  return { title: e.title || q.title, help: e.help !== undefined ? e.help : q.help };
+}
+
+function oT(qid, opt) {
+  if (LANG !== "es") return opt;
+  const e = ((ES_QUESTIONS[qid] || {}).options || {})[opt.id] || {};
+  return {
+    label: e.label || opt.label,
+    sub: e.sub !== undefined ? e.sub : (e.label ? undefined : opt.sub),
+    because: e.because || opt.because
+  };
+}
+
+function mT(key) {
+  const m = METHODS[key];
+  if (LANG !== "es") return m;
+  const e = ES_METHODS[key] || {};
+  const merged = Object.assign({}, m, e);
+  merged.category = ES_CATEGORY[m.category] || m.category;
+  merged.learn = Object.assign({}, m.learn, e.learn || {});
+  return merged;
+}
+
+function aT(key) {
+  const a = APPROACHES[key];
+  return LANG === "es" ? Object.assign({}, a, ES_APPROACHES[key] || {}) : a;
+}
+
+function barT(bar) {
+  return LANG === "es" ? Object.assign({}, bar, ES_BARS[bar.id] || {}) : bar;
+}
+
+
+/* ==========================================================
+   SCORING ENGINE (pure functions – no DOM)
+
+   answers → dimensions → { approach, philosophy, framework,
+   techniques, models, standard, bars, reasons, warnings }
+   ========================================================== */
+
+const PHILOSOPHIES = ["agile", "lean", "sixsigma"];
+const FRAMEWORKS = ["scrum", "scrumban", "xp", "apf", "prince2", "per", "rad"];
+const TECHNIQUES = ["kanban", "cpm", "ccpm", "outcome"];
+const MODELS = ["waterfall", "npi"];
+const AFFINITY_KEYS = PHILOSOPHIES.concat(FRAMEWORKS, TECHNIQUES, MODELS, ["pmbok"]);
+
+const NEUTRAL = 50;
+
+/* Dimensions that pull toward an adaptive or a predictive approach.
+   "!dim" means the inverse of that dimension. */
+const ADAPTIVE_DIMS = ["change", "uncertainty", "!clarity", "delivery", "stakeholder", "autonomy", "experimentation", "flow"];
+const PREDICTIVE_DIMS = ["clarity", "!change", "!uncertainty", "regulation", "dependencies", "teamSize", "timePressure", "!flow"];
+
+/* How each approach shifts the affinity of the other layers. */
+const APPROACH_SHIFT = {
+  predictive: { prince2: 2, per: 1, cpm: 1, scrum: -2, scrumban: -2, xp: -2, rad: -2, apf: -3, agile: -4, kanban: -1 },
+  hybrid: { scrumban: 2, prince2: 1, per: 1, agile: 1 },
+  adaptive: { scrum: 2, scrumban: 2, apf: 2, xp: 1, rad: 1, agile: 2, prince2: -3, per: -1, cpm: -1 }
+};
+
+/* Highest score each option could reach from the questions alone.
+   Scores are compared as a ratio against this, so an approach that
+   appears in many questions doesn't win just by accumulating points. */
+const MAX_POSSIBLE = (() => {
+  const max = {};
+  AFFINITY_KEYS.forEach(k => {
+    max[k] = Math.max(3, QUESTIONS.reduce((sum, q) =>
+      sum + Math.max(0, ...q.options.map(o => (o.s && o.s[k]) || 0)), 0));
+  });
+  return max;
+})();
+
+function getOption(qid, oid) {
+  const q = QUESTIONS.find(x => x.id === qid);
+  return q ? q.options.find(o => o.id === oid) : undefined;
+}
+
+function dimValue(dims, token) {
+  const inverse = token.charAt(0) === "!";
+  const key = inverse ? token.slice(1) : token;
+  const v = dims[key] === undefined ? NEUTRAL : dims[key];
+  return inverse ? 100 - v : v;
+}
+
+const avg = list => list.reduce((a, b) => a + b, 0) / (list.length || 1);
+
+/* ---------- dimensions ---------- */
+function computeDims(answers) {
+  const buckets = {};
+  QUESTIONS.forEach(q => {
+    const opt = getOption(q.id, answers[q.id]);
+    if (!opt || !opt.dims) return;
+    Object.entries(opt.dims).forEach(([k, v]) => {
+      (buckets[k] = buckets[k] || []).push(v);
+    });
+  });
+  const dims = {};
+  Object.entries(buckets).forEach(([k, values]) => { dims[k] = Math.round(avg(values)); });
+  return dims;
+}
+
+function computeBars(dims) {
+  return BARS.map(b => ({
+    id: b.id, label: b.label, tag: b.tag,
+    value: Math.round(avg(b.dims.map(d => dimValue(dims, d))))
+  }));
+}
+
+/* ---------- affinities ---------- */
+function computeAffinity(answers) {
+  const score = {};
+  const contrib = {};
+  AFFINITY_KEYS.forEach(k => { score[k] = 0; contrib[k] = {}; });
+  QUESTIONS.forEach(q => {
+    const opt = getOption(q.id, answers[q.id]);
+    if (!opt || !opt.s) return;
+    Object.entries(opt.s).forEach(([k, v]) => {
+      if (score[k] === undefined) return;
+      score[k] += v;
+      contrib[k][q.id] = (contrib[k][q.id] || 0) + v;
+    });
+  });
+  return { score, contrib };
+}
+
+/* ---------- approach ---------- */
+function decideApproach(dims) {
+  const adaptive = avg(ADAPTIVE_DIMS.map(d => dimValue(dims, d)));
+  const predictive = avg(PREDICTIVE_DIMS.map(d => dimValue(dims, d)));
+  const delta = adaptive - predictive;
+
+  let key = delta > 8 ? "adaptive" : delta < -8 ? "predictive" : "hybrid";
+
+  // Strong pull from the other side turns a clear winner into a hybrid.
+  const rigid = dimValue(dims, "regulation") >= 68 || dimValue(dims, "dependencies") >= 72 || dimValue(dims, "teamSize") >= 78;
+  const fluid = dimValue(dims, "change") >= 68 || dimValue(dims, "uncertainty") >= 68;
+  if (key === "adaptive" && rigid && delta < 16) key = "hybrid";
+  if (key === "predictive" && fluid && delta > -16) key = "hybrid";
+
+  return { key, adaptive: Math.round(adaptive), predictive: Math.round(predictive), delta: Math.round(delta), close: Math.abs(delta) <= 8 };
+}
+
+/* ---------- the full profile ---------- */
+function computeResult(answers) {
+  const dims = computeDims(answers);
+  const bars = computeBars(dims);
+  const { score, contrib } = computeAffinity(answers);
+  const approach = decideApproach(dims);
+
+  // approach-driven adjustment
+  const adjusted = Object.assign({}, score);
+  Object.entries(APPROACH_SHIFT[approach.key]).forEach(([k, v]) => {
+    if (adjusted[k] !== undefined) adjusted[k] += v;
+  });
+  // gates: a framework that assumes a context you don't have
+  if (dimValue(dims, "techComplexity") < 55) adjusted.xp -= 2;
+  if (["techimpl", "process", "internal", "consulting"].indexOf(answers.type) < 0) adjusted.per -= 5;
+  if (dimValue(dims, "resources") > 40) adjusted.ccpm -= 4;
+  if (dimValue(dims, "behavior") < 62) adjusted.outcome -= 3;
+  if (dimValue(dims, "dependencies") < 50 && dimValue(dims, "timePressure") < 60) adjusted.cpm -= 3;
+  if (dimValue(dims, "regulation") >= 75) adjusted.rad -= 3;
+
+  const fit = k => adjusted[k] / MAX_POSSIBLE[k];
+  const rank = keys => keys.slice().sort((a, b) => fit(b) - fit(a));
+
+  const fwRanked = rank(FRAMEWORKS);
+  const framework = fwRanked[0];
+  const frameworkAlt = fwRanked[1];
+  const frameworkWeak = fit(framework) < 0.2;
+
+  const phRanked = rank(PHILOSOPHIES);
+  const philosophy = (fit(phRanked[0]) >= 0.22 && adjusted[phRanked[0]] >= 3) ? phRanked[0] : null;
+
+  const tqRanked = rank(TECHNIQUES);
+  let techniques = tqRanked.filter(k => fit(k) >= 0.3 && adjusted[k] >= 4).slice(0, 2);
+  if (!techniques.length && adjusted[tqRanked[0]] >= 2) techniques = [tqRanked[0]];
+
+  const models = [];
+  const waterfallFits = approach.key === "predictive" &&
+    dimValue(dims, "clarity") >= 65 && dimValue(dims, "change") <= 42 &&
+    dimValue(dims, "uncertainty") <= 45 && dimValue(dims, "delivery") <= 45 &&
+    dimValue(dims, "behavior") <= 65;
+  if (waterfallFits) models.push("waterfall");
+  if (answers.type === "launch" || fit("npi") >= 0.62) models.push("npi");
+
+  const standard = (fit("pmbok") >= 0.34 || dimValue(dims, "regulation") >= 72 ||
+    (dimValue(dims, "teamSize") >= 72 && dimValue(dims, "risk") >= 62)) ? "pmbok" : null;
+
+  const picks = [framework].concat(philosophy ? [philosophy] : [], techniques, models, standard ? [standard] : []);
+
+  const result = {
+    dims, bars, approach, framework, frameworkAlt, frameworkWeak, philosophy, techniques, models, standard,
+    picks, score, adjusted, contrib, answers, fit
+  };
+  result.reasons = topReasons(result, 4);
+  result.tags = headlineTags(bars);
+  return result;
+}
+
+/* ---------- explanations ---------- */
+
+/* How strongly one answer pushed toward the approach the user got. */
+function approachAlignment(opt, approachKey) {
+  if (!opt.dims) return 0;
+  let pull = 0;
+  Object.entries(opt.dims).forEach(([k, v]) => {
+    if (ADAPTIVE_DIMS.indexOf(k) >= 0 || ADAPTIVE_DIMS.indexOf("!" + k) >= 0) {
+      pull += (ADAPTIVE_DIMS.indexOf(k) >= 0 ? 1 : -1) * (v - NEUTRAL) / 25;
+    }
+    if (PREDICTIVE_DIMS.indexOf(k) >= 0 || PREDICTIVE_DIMS.indexOf("!" + k) >= 0) {
+      pull -= (PREDICTIVE_DIMS.indexOf(k) >= 0 ? 1 : -1) * (v - NEUTRAL) / 25;
+    }
+  });
+  if (approachKey === "adaptive") return Math.max(0, pull);
+  if (approachKey === "predictive") return Math.max(0, -pull);
+  return Math.abs(pull) * 0.4;
+}
+
+function topReasons(result, count) {
+  return QUESTIONS
+    .map((q, i) => {
+      const opt = getOption(q.id, result.answers[q.id]);
+      if (!opt) return null;
+      const points = result.picks.reduce((sum, key) => sum + Math.max(0, (result.contrib[key] || {})[q.id] || 0), 0);
+      return { qid: q.id, i, because: opt.because, weight: points + approachAlignment(opt, result.approach.key) };
+    })
+    .filter(x => x && x.weight > 0.8)
+    .sort((a, b) => (b.weight - a.weight) || (a.i - b.i))
+    .slice(0, count);
+}
+
+/* Returns bar ids; the interface turns them into labels. */
+function headlineTags(bars) {
+  return bars.slice().sort((a, b) => b.value - a.value)
+    .filter((b, i) => b.value >= 55 || i === 0)
+    .slice(0, 3)
+    .map(b => b.id);
+}
+
+/* Why the runner-up framework lost: the answer that favored it most. */
+function altReasonOption(result) {
+  const c = result.contrib[result.frameworkAlt] || {};
+  const cw = result.contrib[result.framework] || {};
+  const best = QUESTIONS
+    .map(q => ({ q, edge: (c[q.id] || 0) - (cw[q.id] || 0), v: c[q.id] || 0 }))
+    .filter(x => x.v > 0)
+    .sort((a, b) => (b.edge - a.edge) || (b.v - a.v))[0];
+  if (!best) return null;
+  const opt = getOption(best.q.id, result.answers[best.q.id]);
+  return opt ? { qid: best.q.id, opt: opt } : null;
+}
+
+function altReason(result) {
+  const c = result.contrib[result.frameworkAlt] || {};
+  const cw = result.contrib[result.framework] || {};
+  const best = QUESTIONS
+    .map(q => ({ q, edge: (c[q.id] || 0) - (cw[q.id] || 0), v: c[q.id] || 0 }))
+    .filter(x => x.v > 0)
+    .sort((a, b) => (b.edge - a.edge) || (b.v - a.v))[0];
+  if (!best) return null;
+  const opt = getOption(best.q.id, result.answers[best.q.id]);
+  return opt ? opt.because : null;
+}
+
+/* 3 warning signs: framework first, then the approach. */
+function warningsFor(result) {
+  const list = (METHODS[result.framework].whenNot || []).slice(0, 2);
+  list.push(APPROACHES[result.approach.key].whenNot);
+  if (result.philosophy && METHODS[result.philosophy].whenNot && list.length < 3) {
+    list.push(METHODS[result.philosophy].whenNot[0]);
+  }
+  return list.filter(Boolean).slice(0, 3);
+}
+
+/* Confidence label for the whole profile, from how decided the reading is. */
+function profileStrength(result) {
+  const gap = (result.fit(result.framework) - result.fit(result.frameworkAlt)) * 20;
+  const decided = Math.abs(result.approach.delta);
+  const level = (gap >= 4 && decided >= 12) ? 3 : (gap >= 2 || decided >= 8) ? 2 : 1;
+  return { level, label: ["", "Worth exploring", "Good read", "Clear read"][level] };
+}
+
+
+/* ==========================================================
+   UI
+   ========================================================== */
+(function () {
+  "use strict";
+
+  const app = document.getElementById("app");
+  const announcer = document.getElementById("announcer");
+  const TOTAL = QUESTIONS.length;
+  const SECONDS_PER_QUESTION = 12;
+
+  const state = { screen: "intro", index: 0, answers: {}, dir: 1, word: null };
+
+  /* ---------- helpers ---------- */
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const short = k => mT(k).short || mT(k).name;
+  const currentQ = () => QUESTIONS[state.index];
+
+  function announce(text) {
+    announcer.textContent = "";
+    window.setTimeout(() => { announcer.textContent = text; }, 30);
+  }
+
+  function joinAnd(items) {
+    if (items.length <= 1) return items.join("");
+    return items.slice(0, -1).join(", ") + " and " + items[items.length - 1];
+  }
+
+  const chipHTML = key => `<span class="chip">${esc(mT(key).category)}</span>`;
+
+  function flowHTML(key) {
+    return `<ol class="flow" aria-label="${esc(t("exampleAria"))}">${mT(key).learn.example
+      .map(s => `<li><span>${esc(s)}</span></li>`).join("")}</ol>`;
+  }
+
+  function refHTML(key) {
+    const ref = METHODS[key].ref;
+    if (!ref) return "";
+    return `<p class="ref-line">
+        ${refNote(key) ? `<span class="ref-note"><strong>${esc(t("guideSays"))}:</strong> ${esc(refNote(key))}</span>` : ""}
+        <a href="${esc(refURL(key))}" target="_blank" rel="noopener noreferrer">${esc(t("reference", ref.label))}</a>
+      </p>`;
+  }
+
+  function strengthHTML(s) {
+    const dots = [1, 2, 3].map(i => `<i class="${i <= s.level ? "on" : ""}"></i>`).join("");
+    return `<span class="strength"><span class="dots" aria-hidden="true">${dots}</span>${esc(s.label)}</span>`;
+  }
+
+  const CHECK_SVG = `<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#F3E2D8"/><path d="M5.2 9.3l2.4 2.4 5-5.2" fill="none" stroke="#4A1116" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+  /* Four-point star, the small accent from the brand banner. */
+  const STAR_SVG = size => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z" fill="currentColor"/></svg>`;
+
+  /* ---------- INTRO ---------- */
+  function renderIntro() {
+    const words = WORDMAP.map((w, i) => {
+      const m = mT(w.key);
+      const label = (LANG === "en" && w.label) || m.short || m.name;
+      return `<button type="button" class="word s${w.size} ${w.face === "serif" ? "is-serif" : ""}"
+        data-word="${esc(w.key)}" aria-expanded="false" aria-controls="wordcard"
+        style="animation-delay:${120 + i * 45}ms, ${1200 + i * 390}ms">${esc(label)}</button>`;
+    }).join("");
+
+    app.innerHTML = `
+      <section class="intro fade-in">
+        <div class="wrap wrap--wide">
+          <div class="intro-hero">
+            <h1 class="slab">${esc(t("title"))}</h1>
+            <div class="rule" aria-hidden="true">${STAR_SVG(16)}</div>
+            <p class="intro-lead">${esc(t("lead"))}</p>
+            <p class="intro-text">${esc(t("intro"))}</p>
+            <div class="intro-cta">
+              <button class="btn btn-primary" data-action="start" type="button">${esc(t("start"))}</button>
+              <p class="intro-time">${esc(t("time"))}</p>
+            </div>
+          </div>
+
+          <div class="wordmap-section">
+            <p class="map-caption">${esc(t("mapCaption"))}</p>
+            <div class="wordmap" role="group" aria-label="${esc(t("mapAria"))}">${words}</div>
+            <div class="wordcard is-empty" id="wordcard">${esc(t("emptyHint"))}</div>
+          </div>
+        </div>
+      </section>`;
+  }
+
+  function showWordCard(key) {
+    const card = document.getElementById("wordcard");
+    if (!card) return;
+    const m = mT(key);
+    card.className = "wordcard";
+    card.innerHTML = `<div class="wordcard-body">
+      <div class="wordcard-top"><h3>${esc(m.name)}</h3>${chipHTML(key)}</div>
+      <p class="wordcard-tagline">“${esc(m.tagline)}”</p>
+      <dl>
+        <div><dt>${esc(t("whatItIs"))}</dt><dd>${esc(m.learn.what)}</dd></div>
+        <div><dt>${esc(t("bestFor"))}</dt><dd>${esc(m.learn.bestFor)}</dd></div>
+      </dl>
+      ${flowHTML(key)}
+      ${refHTML(key)}
+      <button type="button" class="link-btn wordcard-close" data-action="close-word">${esc(t("close"))}</button>
+    </div>`;
+  }
+
+  function selectWord(key) {
+    const map = app.querySelector(".wordmap");
+    const card = document.getElementById("wordcard");
+    if (!map || !card) return;
+    state.word = state.word === key ? null : key;
+
+    map.querySelectorAll(".word").forEach(btn => {
+      const on = btn.dataset.word === state.word;
+      btn.classList.toggle("is-active", on);
+      btn.setAttribute("aria-expanded", on ? "true" : "false");
+    });
+    map.classList.toggle("has-active", !!state.word);
+
+    if (state.word) {
+      showWordCard(state.word);
+      announce(mT(state.word).name + ". " + mT(state.word).learn.what);
+    } else {
+      card.className = "wordcard is-empty";
+      card.textContent = t("emptyHint");
+    }
+  }
+
+  /* ---------- QUESTION ---------- */
+  function progressValue() {
+    const answered = state.answers[currentQ().id] ? 1 : 0;
+    return ((state.index + answered) / TOTAL) * 100;
+  }
+
+  function timeLeftText() {
+    const secs = (TOTAL - state.index) * SECONDS_PER_QUESTION;
+    if (secs <= 30) return t("almostDone");
+    return t("timeLeft", Math.max(1, Math.round(secs / 60)));
+  }
+
+  function renderQuestion(animate) {
+    const q = currentQ();
+    const selected = state.answers[q.id];
+    const isLast = state.index === TOTAL - 1;
+    const compact = q.compact || q.options.length >= 7;
+    const focusIndex = Math.max(0, q.options.findIndex(o => o.id === selected));
+
+    const qt = qT(q);
+    const opts = q.options.map((o, i) => {
+      const ot = oT(q.id, o);
+      const checked = o.id === selected;
+      const key = i < 9 ? i + 1 : (i === 9 ? 0 : "");
+      return `<button type="button" class="opt" role="radio" aria-checked="${checked}"
+          tabindex="${i === focusIndex ? 0 : -1}" data-opt="${esc(o.id)}">
+          <span class="opt-dot" aria-hidden="true"></span>
+          <span class="opt-text">
+            <span class="opt-label">${esc(ot.label)}</span>
+            ${ot.sub ? `<span class="opt-sub">${esc(ot.sub)}</span>` : ""}
+          </span>
+          ${key !== "" ? `<span class="opt-key" aria-hidden="true">${key}</span>` : ""}
+        </button>`;
+    }).join("");
+
+    const anim = animate ? (state.dir > 0 ? "in-fwd" : "in-back") : "";
+
+    app.innerHTML = `
+      <section class="quiz">
+        <div class="wrap">
+          <div class="progress-row">
+            <span>${t("question", "<strong>" + (state.index + 1) + "</strong>", TOTAL)}</span>
+            <span>${timeLeftText()}</span>
+          </div>
+          <div class="bar" role="progressbar" aria-label="${esc(t('progressAria'))}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progressValue())}">
+            <div class="bar-fill" style="width:${progressValue()}%"></div>
+          </div>
+          <div class="stage ${anim}">
+            <h2 class="q-title" id="q-title" tabindex="-1">${esc(qt.title)}</h2>
+            ${qt.help ? `<p class="q-help">${esc(qt.help)}</p>` : ""}
+            <div class="options ${compact ? "is-compact" : ""}" role="radiogroup" aria-labelledby="q-title">${opts}</div>
+          </div>
+        </div>
+        <div class="q-nav">
+          <div class="wrap">
+            <div class="q-nav-inner">
+              <button type="button" class="btn btn-ghost" data-action="back">${esc(t("back"))}</button>
+              <span class="kbd-hint">${esc(t("kbdHint"))}</span>
+              <button type="button" class="btn btn-primary" data-action="next" ${selected ? "" : "disabled"} aria-describedby="continue-note">
+                ${esc(isLast ? t("seeResult") : t("next"))}
+              </button>
+            </div>
+            <p class="continue-note" id="continue-note">${selected ? "" : esc(t("selectFirst"))}</p>
+          </div>
+        </div>
+      </section>`;
+
+    const title = document.getElementById("q-title");
+    if (title) title.focus({ preventScroll: true });
+    window.scrollTo({ top: 0 });
+  }
+
+  function selectOption(optId, focusIt) {
+    const q = currentQ();
+    if (!q.options.some(o => o.id === optId)) return;
+    state.answers[q.id] = optId;
+
+    app.querySelectorAll(".opt").forEach(btn => {
+      const on = btn.dataset.opt === optId;
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+      btn.tabIndex = on ? 0 : -1;
+      if (on && focusIt) btn.focus();
+    });
+    const next = app.querySelector('[data-action="next"]');
+    if (next) next.disabled = false;
+    const note = document.getElementById("continue-note");
+    if (note) note.textContent = "";
+    const fill = app.querySelector(".bar-fill");
+    const bar = app.querySelector(".bar");
+    if (fill) fill.style.width = progressValue() + "%";
+    if (bar) bar.setAttribute("aria-valuenow", String(Math.round(progressValue())));
+  }
+
+  function goNext() {
+    if (!state.answers[currentQ().id]) return;
+    if (state.index < TOTAL - 1) {
+      state.index += 1;
+      state.dir = 1;
+      renderQuestion(true);
+      announce(t("question", state.index + 1, TOTAL));
+    } else {
+      state.screen = "result";
+      renderResult();
+    }
+  }
+
+  function goBack() {
+    if (state.index > 0) {
+      state.index -= 1;
+      state.dir = -1;
+      renderQuestion(true);
+      announce(t("question", state.index + 1, TOTAL));
+    } else {
+      state.screen = "intro"; state.word = null;
+      renderIntro();
+      const start = app.querySelector('[data-action="start"]');
+      if (start) start.focus();
+    }
+  }
+
+  /* ---------- RESULT ---------- */
+  function learnHTML(key, id) {
+    const L = mT(key).learn;
+    return `<div class="learn" id="${id}" hidden>
+      <dl>
+        <div><dt>${esc(t("whatItIs"))}</dt><dd>${esc(L.what)}</dd></div>
+        <div><dt>${esc(t("bestFor"))}</dt><dd>${esc(L.bestFor)}</dd></div>
+        ${L.watchOut ? `<div><dt>${esc(t("watchOut"))}</dt><dd>${esc(L.watchOut)}</dd></div>` : ""}
+      </dl>
+      <div class="learn-ex">
+        <p class="learn-ex-title">${esc(t("simpleExample"))}</p>
+        ${flowHTML(key)}
+        ${L.exampleNote ? `<p class="learn-note">${esc(L.exampleNote)}</p>` : ""}
+      </div>
+      ${refHTML(key)}
+    </div>`;
+  }
+
+  function toggleBtn(target, label, cls) {
+    return `<button type="button" class="link-btn ${cls || ""}" aria-expanded="false" aria-controls="${target}" data-toggle="${target}">
+      ${esc(label)} <svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  }
+
+  let lastShareText = "";
+
+  /* Rows of the stack, top to bottom. */
+  function layersOf(r) {
+    const rows = [{
+      id: "approach", label: t("lApproach"), name: aT(r.approach.key).name,
+      note: aT(r.approach.key).role, connector: "↓"
+    }];
+
+    if (r.philosophy) {
+      rows.push({ id: "philosophy", label: t("lPhilosophy"), key: r.philosophy,
+        name: mT(r.philosophy).name, note: mT(r.philosophy).tagline, connector: "↓" });
+    } else {
+      rows.push({ id: "philosophy", label: t("lPhilosophy"), name: t("noPhilosophy"),
+        note: t("noPhilosophyNote"), muted: true, connector: "↓" });
+    }
+
+    rows.push({ id: "framework", label: t("lFramework"), key: r.framework,
+      name: mT(r.framework).name, note: mT(r.framework).tagline,
+      caveat: r.frameworkWeak ? t("weakFramework") : null,
+      connector: r.techniques.length ? "+" : null });
+
+    r.techniques.forEach((k, i) => {
+      rows.push({ id: "technique-" + k, label: i === 0 ? t("lTechnique") : t("lAlsoUseful"), key: k,
+        name: mT(k).name, note: mT(k).tagline,
+        connector: i < r.techniques.length - 1 ? "+" : null });
+    });
+
+    if (!r.techniques.length) {
+      rows.push({ id: "technique-none", label: t("lTechnique"), name: t("noTechnique"),
+        note: t("noTechniqueNote"), muted: true });
+    }
+
+    r.models.forEach(k => {
+      rows.push({ id: "model-" + k, label: mT(k).category, key: k,
+        name: mT(k).name, note: mT(k).tagline, supporting: true });
+    });
+
+    if (r.standard) {
+      rows.push({ id: "standard", label: t("lReference"), key: r.standard,
+        name: mT(r.standard).name, note: mT(r.standard).tagline, supporting: true });
+    }
+    return rows;
+  }
+
+  function stackHTML(rows) {
+    return rows.map(row => {
+      const learnId = row.key ? "learn-" + row.id : null;
+      return `<div class="layer ${row.supporting ? "is-supporting" : ""} ${row.muted ? "is-muted" : ""}">
+          <p class="layer-label">${esc(row.label)}</p>
+          <h3 class="layer-name">${esc(row.name)}</h3>
+          <p class="layer-note">${esc(row.note)}</p>
+          ${row.caveat ? `<p class="layer-caveat">${esc(row.caveat)}</p>` : ""}
+          ${learnId ? toggleBtn(learnId, t("learnAbout", short(row.key))) : ""}
+          ${learnId ? learnHTML(row.key, learnId) : ""}
+        </div>
+        ${row.connector ? `<div class="connector" aria-hidden="true">${row.connector}</div>` : ""}`;
+    }).join("");
+  }
+
+  function tagLabel(id) {
+    const bar = BARS.filter(b => b.id === id)[0];
+    return bar ? barT(bar).tag : id;
+  }
+
+  function barsHTML(bars) {
+    return bars.map(barT).map((b, i) => `<div class="metric">
+        <span class="metric-label">${esc(b.label)}</span>
+        <span class="metric-track"><span class="metric-fill" style="width:${b.value}%;animation-delay:${i * 70}ms"></span></span>
+        <span class="metric-value">${b.value}</span>
+      </div>`).join("");
+  }
+
+  function comboLine(r) {
+    const parts = [];
+    if (r.philosophy) parts.push(mT(r.philosophy).name.toUpperCase());
+    parts.push(short(r.framework).toUpperCase());
+    const techs = r.techniques.map(k => short(k).toUpperCase());
+    return { top: parts, techs };
+  }
+
+  function renderResult() {
+    const r = computeResult(state.answers);
+    const approach = aT(r.approach.key);
+    const rows = layersOf(r);
+    const strength = profileStrength(r);
+    const combo = comboLine(r);
+
+    const checks = r.reasons.map(x => {
+      const opt = getOption(x.qid, state.answers[x.qid]);
+      return `<li>${CHECK_SVG}<span>${esc(oT(x.qid, opt).because)}</span></li>`;
+    }).join("");
+
+    const roleParts = [mT(r.framework).role].concat(r.techniques.map(k => mT(k).role));
+    const comboText = roleParts.join(" ");
+
+    const steps = mT(r.framework).start
+      .map(([ti, d]) => `<li><div><strong>${esc(ti)}</strong><span>${esc(d)}</span></div></li>`).join("");
+    const techStep = r.techniques.length ? mT(r.techniques[0]).start[0] : null;
+
+    const warnList = (mT(r.framework).whenNot || []).slice(0, 2).concat([aT(r.approach.key).whenNot]);
+    const warnings = warnList.filter(Boolean).slice(0, 3).map(w => `<li>${esc(w)}</li>`).join("");
+    const alt = mT(r.frameworkAlt);
+    const altWhyOpt = altReasonOption(r);
+    const altWhy = altWhyOpt ? oT(altWhyOpt.qid, altWhyOpt.opt).because : null;
+
+    const shareTechs = r.techniques.map(short).join(" + ");
+    lastShareText = t("shareTitle") + " " + approach.emoji + "\n" +
+      t("shareApproach") + ": " + approach.name +
+      (r.philosophy ? "  ·  " + t("sharePhilosophy") + ": " + mT(r.philosophy).name : "") +
+      "  ·  " + t("shareFramework") + ": " + short(r.framework) +
+      (shareTechs ? "  +  " + shareTechs : "") + "\n" +
+      approach.tagline + "\n\n" + t("shareEnd");
+
+    app.innerHTML = `
+      <section class="result-page fade-in">
+        <div class="wrap">
+          <article class="sheet" aria-labelledby="result-name">
+            <header class="result-head">
+              <p class="result-kicker">${esc(t("kicker"))}</p>
+              <h1 class="result-name" id="result-name" tabindex="-1">${esc((approach.name + " " + t("approachSuffix")).trim())}</h1>
+              <p class="result-tagline">“${esc(approach.tagline)}”</p>
+              <p class="tagline-row">${r.tags.map(id => `<span class="tag">${esc(tagLabel(id))}</span>`).join("")}</p>
+              <p class="result-what">${esc(approach.what)}</p>
+              <p class="read-note">${esc(t("readNote", t("read" + strength.level), TOTAL))}</p>
+            </header>
+
+            <section class="r-section">
+              <h2>${esc(t("stackTitle"))}</h2>
+              <p class="section-note">${esc(t("stackNote"))}</p>
+              <div class="stack">${stackHTML(rows)}</div>
+            </section>
+
+            <section class="r-section">
+              <h2>${esc(t("whyTitle"))}</h2>
+              <ul class="checks">${checks}</ul>
+            </section>
+
+            <section class="r-section">
+              <h2>${esc(t("profileTitle"))}</h2>
+              <div class="metrics">${barsHTML(r.bars)}</div>
+              <p class="section-note">${esc(t("profileNote"))}</p>
+            </section>
+
+            <section class="r-section">
+              <h2>${esc(t("comboTitle"))}</h2>
+              <div class="combo" aria-hidden="true">
+                ${combo.top.map((t, i) => `<span class="combo-item ${i === combo.top.length - 1 ? "is-main" : ""}">${esc(t)}</span>${i < combo.top.length - 1 ? '<span class="combo-op">↓</span>' : ""}`).join("")}
+                ${combo.techs.map(t => `<span class="combo-op">+</span><span class="combo-item is-side">${esc(t)}</span>`).join("")}
+              </div>
+              <p>${esc(comboText)}</p>
+            </section>
+
+            <section class="r-section">
+              <h2>${esc(t("startTitle"))}</h2>
+              <ol class="steps">${steps}</ol>
+              ${techStep ? `<p class="step-extra"><strong>${esc(t("withTech", short(r.techniques[0])))}</strong> ${esc(techStep[1])}</p>` : ""}
+            </section>
+
+            <section class="r-section">
+              <h2>${esc(t("warnTitle"))}</h2>
+              <ul class="warnings">${warnings}</ul>
+            </section>
+          </article>
+
+          <aside class="also" aria-labelledby="also-name">
+            <p class="also-label">${esc(t("alsoConsider"))}</p>
+            <div class="also-head">
+              <h2 class="also-name" id="also-name">${esc(alt.name)}</h2>${chipHTML(r.frameworkAlt)}
+            </div>
+            <p class="also-if">“${esc(alt.alsoIf || alt.tagline)}”</p>
+            ${altWhy ? `<p class="also-why">${esc(t("altWhy", altWhy.charAt(0).toLowerCase() + altWhy.slice(1)))}</p>` : ""}
+            ${r.approach.close ? `<p class="also-why">${esc(t("closeCall", r.approach.delta >= 0 ? t("morePredictive") : t("moreAdaptive")))}</p>` : ""}
+            ${toggleBtn("learn-alt", t("learnAbout", short(r.frameworkAlt)), "learn-toggle")}
+            ${learnHTML(r.frameworkAlt, "learn-alt")}
+          </aside>
+
+          <div class="others">
+            ${toggleBtn("others-body", t("whyNotOne"), "learn-toggle")}
+            <div class="others-body" id="others-body" hidden>
+              <p>${esc(t("whyNotBody1"))}</p>
+              <p>${esc(t("whyNotBody2"))}</p>
+            </div>
+          </div>
+
+          <section class="lesson">
+            <p class="big">${esc(t("lessonBig"))}</p>
+            <p>${esc(t("lessonMid"))}</p>
+            <p class="small">${esc(t("lessonSmall"))}</p>
+          </section>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" data-action="copy">${esc(t("copy"))}</button>
+            <button type="button" class="btn btn-outline" data-action="restart">${esc(t("retake"))}</button>
+            <button type="button" class="btn btn-ghost" data-action="edit">${esc(t("edit"))}</button>
+            <span class="copy-status" role="status" aria-live="polite"></span>
+            <div class="copy-fallback" hidden></div>
+          </div>
+
+          <p class="source">${esc(t("sourceText"))} <a href="${esc(SOURCE.url)}" target="_blank" rel="noopener noreferrer">${esc(t("sourceLink"))}</a>. ${esc(t("sourceNote"))}</p>
+        </div>
+      </section>`;
+
+    window.scrollTo({ top: 0 });
+    const h = document.getElementById("result-name");
+    if (h) h.focus({ preventScroll: true });
+    announce(t("announceProfile", approach.name, mT(r.framework).name));
+  }
+
+  /* ---------- copy ---------- */
+  function showCopied(ok) {
+    const status = app.querySelector(".copy-status");
+    const btn = app.querySelector('[data-action="copy"]');
+    if (ok) {
+      if (status) status.textContent = t("copiedStatus");
+      if (btn) btn.textContent = t("copied");
+      window.setTimeout(() => {
+        if (btn && btn.isConnected) btn.textContent = t("copy");
+        if (status && status.isConnected) status.textContent = "";
+      }, 2400);
+    } else {
+      const box = app.querySelector(".copy-fallback");
+      if (!box) return;
+      box.hidden = false;
+      box.innerHTML = `<label class="sr-only" for="share-text">${esc(t("copyLabel"))}</label><textarea id="share-text" readonly>${esc(lastShareText)}</textarea>`;
+      const ta = box.querySelector("textarea");
+      ta.focus();
+      ta.select();
+      if (status) status.textContent = t("copyManual");
+    }
+  }
+
+  function legacyCopy(text) {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand && document.execCommand("copy");
+      document.body.removeChild(ta);
+      return !!ok;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function copyResult() {
+    const text = lastShareText;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => showCopied(true), () => showCopied(legacyCopy(text)));
+    } else {
+      showCopied(legacyCopy(text));
+    }
+  }
+
+  /* ---------- events ---------- */
+  app.addEventListener("click", e => {
+    const wordBtn = e.target.closest(".word");
+    if (wordBtn) { selectWord(wordBtn.dataset.word); return; }
+
+    const optBtn = e.target.closest(".opt");
+    if (optBtn) { selectOption(optBtn.dataset.opt, false); return; }
+
+    const toggle = e.target.closest("[data-toggle]");
+    if (toggle) {
+      const panel = document.getElementById(toggle.dataset.toggle);
+      if (!panel) return;
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", open ? "false" : "true");
+      panel.hidden = open;
+      return;
+    }
+
+    const actionBtn = e.target.closest("[data-action]");
+    if (!actionBtn || actionBtn.disabled) return;
+    switch (actionBtn.dataset.action) {
+      case "start":
+        state.screen = "quiz"; state.index = 0; state.dir = 1; state.word = null;
+        renderQuestion(true);
+        break;
+      case "next": goNext(); break;
+      case "back": goBack(); break;
+      case "restart":
+        state.answers = {}; state.index = 0; state.dir = 1; state.screen = "quiz"; state.word = null;
+        renderQuestion(true);
+        break;
+      case "edit":
+        state.screen = "quiz"; state.index = TOTAL - 1; state.dir = -1;
+        renderQuestion(true);
+        break;
+      case "copy": copyResult(); break;
+      case "close-word": {
+        const active = app.querySelector(".word.is-active");
+        selectWord(state.word);
+        if (active) active.focus();
+        break;
+      }
+    }
+  });
+
+  app.addEventListener("keydown", e => {
+    if (state.screen !== "quiz") return;
+    const optBtn = e.target.closest && e.target.closest(".opt");
+    if (!optBtn) return;
+    const all = Array.from(app.querySelectorAll(".opt"));
+    const i = all.indexOf(optBtn);
+    let target = null;
+    switch (e.key) {
+      case "ArrowDown": case "ArrowRight": target = all[(i + 1) % all.length]; break;
+      case "ArrowUp": case "ArrowLeft": target = all[(i - 1 + all.length) % all.length]; break;
+      case "Home": target = all[0]; break;
+      case "End": target = all[all.length - 1]; break;
+      case "Enter":
+        e.preventDefault();
+        selectOption(optBtn.dataset.opt, true);
+        goNext();
+        return;
+      default: return;
+    }
+    e.preventDefault();
+    selectOption(target.dataset.opt, true);
+  });
+
+  document.addEventListener("keydown", e => {
+    if (state.screen !== "quiz" || e.altKey || e.ctrlKey || e.metaKey) return;
+    const tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || tag === "select") return;
+    const inOptions = e.target.closest && e.target.closest(".opt");
+    const onButton = tag === "button";
+
+    if (/^[0-9]$/.test(e.key)) {
+      const q = currentQ();
+      const idx = e.key === "0" ? 9 : Number(e.key) - 1;
+      if (q.options[idx]) { e.preventDefault(); selectOption(q.options[idx].id, true); }
+      return;
+    }
+    if (inOptions) return; // handled above
+    if ((e.key === "ArrowDown" || e.key === "ArrowUp") && !onButton) {
+      const target = app.querySelector('.opt[aria-checked="true"]') || app.querySelector(".opt");
+      if (target) { e.preventDefault(); target.focus(); }
+      return;
+    }
+    if (e.key === "Enter" && !onButton) {
+      e.preventDefault();
+      goNext();
+    }
+  });
+
+  /* ---------- language ---------- */
+  function renderCurrent() {
+    if (state.screen === "result") renderResult();
+    else if (state.screen === "quiz") renderQuestion(false);
+    else renderIntro();
+  }
+
+  function setLang(lang) {
+    if (lang === LANG) return;
+    LANG = lang;
+    document.documentElement.lang = lang;
+    document.title = t("htmlTitle");
+    const sw = document.getElementById("langswitch");
+    if (sw) {
+      sw.querySelectorAll(".lang-btn").forEach(b => {
+        const on = b.dataset.lang === lang;
+        b.classList.toggle("is-on", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+    state.word = null;
+    renderCurrent();
+  }
+
+  const langSwitch = document.getElementById("langswitch");
+  if (langSwitch) {
+    langSwitch.addEventListener("click", e => {
+      const btn = e.target.closest(".lang-btn");
+      if (btn) setLang(btn.dataset.lang);
+    });
+  }
+
+  renderIntro();
+})();
+
+</script>
+</body>
+</html>
